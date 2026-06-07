@@ -1,4 +1,5 @@
 import "../global.css";
+import "@/lib/reanimated-config";
 import "@/lib/i18n";
 
 import { useEffect, useState } from "react";
