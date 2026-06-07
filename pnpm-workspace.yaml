@@ -1,0 +1,11 @@
+packages:
+  - "web-app"
+  - "mobile-app"
+  - "shared/*"
+
+# Native modullerin postinstall build izinleri (pnpm 10).
+onlyBuiltDependencies:
+  - sharp
+  - esbuild
+ignoredBuiltDependencies:
+  - unrs-resolver
