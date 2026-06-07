@@ -17,6 +17,58 @@ import {
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Spinner } from "@/components/ui/spinner";
+import { EmptyState } from "@/components/ui/empty-state";
+import { toast } from "sonner";
+import { Inbox, Terminal } from "lucide-react";
 
 function Section({
   title,
@@ -193,6 +245,158 @@ export function ComponentGallery() {
             )}
           </Field>
         </Variant>
+      </Section>
+
+      <Section title="Dialog">
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="outline">Open dialog</Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Dialog title</DialogTitle>
+              <DialogDescription>Bu bir dialog ornegidir.</DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <Button>Tamam</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </Section>
+
+      <Section title="Alert Dialog">
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button variant="destructive">Sil</Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Emin misin?</AlertDialogTitle>
+              <AlertDialogDescription>
+                Bu islem geri alinamaz.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Vazgec</AlertDialogCancel>
+              <AlertDialogAction>Sil</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </Section>
+
+      <Section title="Sheet">
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant="outline">Open sheet</Button>
+          </SheetTrigger>
+          <SheetContent>
+            <SheetHeader>
+              <SheetTitle>Sheet title</SheetTitle>
+              <SheetDescription>Kenardan acilan panel.</SheetDescription>
+            </SheetHeader>
+          </SheetContent>
+        </Sheet>
+      </Section>
+
+      <Section title="Dropdown Menu">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline">Menu</Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel>Hesap</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Profil</DropdownMenuItem>
+            <DropdownMenuItem>Ayarlar</DropdownMenuItem>
+            <DropdownMenuItem className="text-destructive focus:text-destructive">
+              Cikis
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </Section>
+
+      <Section title="Popover">
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button variant="outline">Popover</Button>
+          </PopoverTrigger>
+          <PopoverContent>Popover icerigi burada.</PopoverContent>
+        </Popover>
+      </Section>
+
+      <Section title="Tooltip">
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button variant="outline">Hover me</Button>
+          </TooltipTrigger>
+          <TooltipContent>Tooltip metni</TooltipContent>
+        </Tooltip>
+      </Section>
+
+      <Section title="Toast">
+        <Variant label="default">
+          <Button variant="outline" onClick={() => toast("Kaydedildi")}>
+            Toast
+          </Button>
+        </Variant>
+        <Variant label="success">
+          <Button
+            variant="outline"
+            onClick={() => toast.success("Basarili")}
+          >
+            Success
+          </Button>
+        </Variant>
+        <Variant label="error">
+          <Button variant="outline" onClick={() => toast.error("Hata olustu")}>
+            Error
+          </Button>
+        </Variant>
+      </Section>
+
+      <Section title="Alert">
+        <Variant label="default">
+          <Alert className="max-w-md">
+            <Terminal />
+            <AlertTitle>Bilgi</AlertTitle>
+            <AlertDescription>
+              Bu bir bilgilendirme uyarisidir.
+            </AlertDescription>
+          </Alert>
+        </Variant>
+        <Variant label="destructive">
+          <Alert variant="destructive" className="max-w-md">
+            <Terminal />
+            <AlertTitle>Hata</AlertTitle>
+            <AlertDescription>Bir seyler ters gitti.</AlertDescription>
+          </Alert>
+        </Variant>
+      </Section>
+
+      <Section title="Spinner">
+        <Spinner />
+        <Spinner className="size-6" />
+        <Spinner className="size-8 text-primary" />
+      </Section>
+
+      <Section title="Skeleton">
+        <div className="flex items-center gap-3">
+          <Skeleton className="size-10 rounded-full" />
+          <div className="flex flex-col gap-2">
+            <Skeleton className="h-4 w-40" />
+            <Skeleton className="h-4 w-24" />
+          </div>
+        </div>
+      </Section>
+
+      <Section title="Empty State">
+        <EmptyState
+          icon={Inbox}
+          title="Henuz kayit yok"
+          description="Ilk kaydini olusturarak basla."
+          action={<Button size="sm">Olustur</Button>}
+          className="w-full max-w-md"
+        />
       </Section>
     </div>
   );
