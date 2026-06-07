@@ -1,0 +1,19 @@
+**/node_modules
+**/.next
+**/.expo
+**/.turbo
+**/dist
+.git
+.github
+**/*.log
+**/.DS_Store
+
+# env dosyalari imaja girmesin; degerler --build-arg ile geliyor
+**/.env
+**/.env.*
+.env.supabase
+
+# mobile-app derlemeye gerek yok
+mobile-app/ios
+mobile-app/android
+mobile-app/.expo

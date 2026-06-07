@@ -68,8 +68,37 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
 import { EmptyState } from "@/components/ui/empty-state";
 import { toast } from "sonner";
-import { ArrowUpDown, Inbox, Terminal } from "lucide-react";
+import {
+  Activity,
+  ArrowUpDown,
+  DollarSign,
+  Inbox,
+  Terminal,
+  Users,
+} from "lucide-react";
 import { type ColumnDef } from "@tanstack/react-table";
+import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
+import { StatCard } from "@/components/ui/stat-card";
+import { DateRangePicker } from "@/components/ui/date-range-picker";
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+  type ChartConfig,
+} from "@/components/ui/chart";
+
+const revenueData = [
+  { month: "Oca", value: 1200 },
+  { month: "Sub", value: 2100 },
+  { month: "Mar", value: 1800 },
+  { month: "Nis", value: 2600 },
+  { month: "May", value: 2400 },
+  { month: "Haz", value: 3200 },
+];
+
+const revenueChartConfig = {
+  value: { label: "Gelir", color: "var(--primary)" },
+} satisfies ChartConfig;
 import {
   Card,
   CardContent,
@@ -627,6 +656,59 @@ export function ComponentGallery() {
             <ThemeToggle />
           </div>
         </div>
+      </Section>
+
+      <Section title="Stat Cards">
+        <StatCard
+          title="Gelir"
+          value="$12.4k"
+          delta={{ label: "+12% bu ay", positive: true }}
+          icon={DollarSign}
+          className="max-w-xs"
+        />
+        <StatCard
+          title="Kullanici"
+          value="1,240"
+          delta={{ label: "+3.1%", positive: true }}
+          icon={Users}
+          className="max-w-xs"
+        />
+        <StatCard
+          title="Aktif"
+          value="312"
+          delta={{ label: "-1.2%", positive: false }}
+          icon={Activity}
+          className="max-w-xs"
+        />
+      </Section>
+
+      <Section title="Chart (area)">
+        <ChartContainer
+          config={revenueChartConfig}
+          className="h-48 w-full max-w-lg"
+        >
+          <AreaChart data={revenueData} margin={{ left: 12, right: 12 }}>
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="month"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+            />
+            <ChartTooltip content={<ChartTooltipContent />} />
+            <Area
+              dataKey="value"
+              type="natural"
+              fill="var(--color-value)"
+              fillOpacity={0.3}
+              stroke="var(--color-value)"
+            />
+          </AreaChart>
+        </ChartContainer>
+      </Section>
+
+      <Section title="Date Range Picker">
+        <DateRangePicker />
       </Section>
     </div>
   );
