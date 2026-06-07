@@ -1,16 +1,8 @@
 import { redirect } from "next/navigation";
 
 import { AppSidebar } from "@/components/app-sidebar";
-import { LanguageToggle } from "@/components/language-toggle";
-import { ThemeToggle } from "@/components/theme-toggle";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
+import { AppTopbar } from "@/components/app-topbar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { createClient } from "@/lib/supabase/server";
 import { getUserRole } from "@/lib/supabase/role";
 
@@ -43,30 +35,7 @@ export default async function AppLayout({
     <SidebarProvider>
       <AppSidebar isAdmin={role === "admin"} />
       <SidebarInset>
-        <header className="flex h-14 shrink-0 items-center justify-between gap-2 border-b px-4">
-          <div className="flex items-center gap-2">
-            <SidebarTrigger />
-            <Separator orientation="vertical" className="h-4" />
-            <span className="text-sm font-medium">Dashboard</span>
-          </div>
-          <div className="flex items-center gap-2">
-            {role ? (
-              <Badge variant={role === "admin" ? "default" : "secondary"}>
-                {role}
-              </Badge>
-            ) : null}
-            <LanguageToggle />
-            <ThemeToggle />
-            <span className="ml-1 hidden text-sm text-muted-foreground sm:inline">
-              {user.email}
-            </span>
-            <form action={signOut}>
-              <Button type="submit" variant="outline" size="sm">
-                Cikis yap
-              </Button>
-            </form>
-          </div>
-        </header>
+        <AppTopbar email={user.email} role={role} signOutAction={signOut} />
         <main className="flex flex-1 flex-col p-6">{children}</main>
       </SidebarInset>
     </SidebarProvider>

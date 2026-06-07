@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ActivityIndicator, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,6 +12,7 @@ import { supabase } from "@/lib/supabase";
 
 export default function ResetPasswordScreen() {
   const router = useRouter();
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -35,23 +37,23 @@ export default function ResetPasswordScreen() {
       <View className="flex-1 justify-center gap-6 px-6">
         <View className="gap-2">
           <Text className="font-sans-bold text-3xl text-foreground">
-            Sifre sifirlama
+            {t("auth.reset.title")}
           </Text>
           <Text className="font-sans text-muted-foreground">
-            E-postana sifirlama baglantisi gonderelim.
+            {t("auth.reset.subtitle")}
           </Text>
         </View>
 
         {sent ? (
           <Text className="font-sans text-sm text-muted-foreground">
-            Baglanti gonderildi. E-postani kontrol et.
+            {t("auth.reset.sent")}
           </Text>
         ) : (
           <View className="gap-4">
             <View className="gap-2">
-              <Label>E-posta</Label>
+              <Label>{t("auth.email")}</Label>
               <Input
-                placeholder="ornek@eposta.com"
+                placeholder={t("auth.emailPlaceholder")}
                 autoCapitalize="none"
                 autoComplete="email"
                 keyboardType="email-address"
@@ -63,14 +65,14 @@ export default function ResetPasswordScreen() {
               <Text className="font-sans text-sm text-destructive">{error}</Text>
             ) : null}
             <Button onPress={onSubmit} disabled={loading}>
-              <Text>Baglanti gonder</Text>
+              <Text>{t("auth.reset.sendLink")}</Text>
             </Button>
             {loading ? <ActivityIndicator /> : null}
           </View>
         )}
 
         <Button variant="ghost" onPress={() => router.back()}>
-          <Text>Girise don</Text>
+          <Text>{t("auth.reset.backToLogin")}</Text>
         </Button>
       </View>
     </SafeAreaView>

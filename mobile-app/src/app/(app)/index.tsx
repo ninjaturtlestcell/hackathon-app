@@ -22,7 +22,7 @@ export default function HomeScreen() {
         <View className="flex-row items-start justify-between gap-3">
           <View className="shrink gap-1">
             <Text className="font-sans-bold text-2xl text-foreground">
-              Home
+              {t("nav.home")}
             </Text>
             <Text className="font-sans text-sm text-muted-foreground">
               {user?.email ?? "-"}

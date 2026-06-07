@@ -1,10 +1,14 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 import logoLight from "@shared/assets/logo-light.png";
 import logoDark from "@shared/assets/logo-dark.png";
 import { Button } from "@/components/ui/button";
 
 export function SiteHeader() {
+  const { t } = useTranslation();
   return (
     <header className="flex items-center justify-between border-b px-6 py-4">
       <Link href="/" className="flex items-center">
@@ -28,10 +32,10 @@ export function SiteHeader() {
       </Link>
       <nav className="flex items-center gap-2">
         <Button asChild variant="ghost">
-          <Link href="/login">Giris yap</Link>
+          <Link href="/login">{t("auth.signIn")}</Link>
         </Button>
         <Button asChild>
-          <Link href="/login">Basla</Link>
+          <Link href="/login">{t("landing.start")}</Link>
         </Button>
       </nav>
     </header>

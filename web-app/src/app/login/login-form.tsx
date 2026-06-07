@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslation } from "react-i18next";
 
 import { Button } from "@/components/ui/button";
 import { Field } from "@/components/ui/field";
@@ -18,6 +19,7 @@ export function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const returnUrl = searchParams.get("returnUrl") ?? "/app";
+  const { t } = useTranslation();
 
   const [mode, setMode] = useState<Mode>("signin");
   const [serverError, setServerError] = useState<string | null>(null);
@@ -49,7 +51,7 @@ export function LoginForm() {
       return;
     }
     if (mode === "signup") {
-      setInfo("Kayit alindi. E-postani dogrulaman gerekebilir.");
+      setInfo(t("auth.signupTaken"));
       return;
     }
     router.replace(returnUrl);
@@ -60,33 +62,33 @@ export function LoginForm() {
     <form onSubmit={onSubmit} className="flex w-full max-w-sm flex-col gap-4">
       <div className="flex flex-col gap-1">
         <h1 className="text-2xl font-bold tracking-tight">
-          {mode === "signin" ? "Giris yap" : "Kayit ol"}
+          {mode === "signin" ? t("auth.signIn") : t("auth.signUp")}
         </h1>
         <p className="text-sm text-muted-foreground">
-          Devam etmek icin hesabina giris yap.
+          {t("auth.continueToAccount")}
         </p>
       </div>
 
-      <Field control={form.control} name="email" label="E-posta">
+      <Field control={form.control} name="email" label={t("auth.email")}>
         {({ field, fieldState, id }) => (
           <Input
             id={id}
             type="email"
             autoComplete="email"
-            placeholder="ornek@eposta.com"
+            placeholder={t("auth.emailPlaceholder")}
             aria-invalid={!!fieldState.error}
             {...field}
           />
         )}
       </Field>
 
-      <Field control={form.control} name="password" label="Sifre">
+      <Field control={form.control} name="password" label={t("auth.password")}>
         {({ field, fieldState, id }) => (
           <Input
             id={id}
             type="password"
             autoComplete={mode === "signin" ? "current-password" : "new-password"}
-            placeholder="********"
+            placeholder={t("auth.passwordPlaceholder")}
             aria-invalid={!!fieldState.error}
             {...field}
           />
@@ -98,7 +100,7 @@ export function LoginForm() {
           href="/auth/reset-password"
           className="-mt-1 self-end text-sm text-muted-foreground hover:underline"
         >
-          Sifremi unuttum
+          {t("auth.forgotPassword")}
         </Link>
       ) : null}
 
@@ -111,8 +113,8 @@ export function LoginForm() {
         {form.formState.isSubmitting
           ? "..."
           : mode === "signin"
-            ? "Giris yap"
-            : "Kayit ol"}
+            ? t("auth.signIn")
+            : t("auth.signUp")}
       </Button>
 
       <Button
@@ -124,9 +126,7 @@ export function LoginForm() {
           setMode((m) => (m === "signin" ? "signup" : "signin"));
         }}
       >
-        {mode === "signin"
-          ? "Hesabin yok mu? Kayit ol"
-          : "Zaten hesabin var mi? Giris yap"}
+        {mode === "signin" ? t("auth.noAccount") : t("auth.haveAccount")}
       </Button>
     </form>
   );

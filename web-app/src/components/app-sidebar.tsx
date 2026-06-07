@@ -10,6 +10,7 @@ import {
   Settings,
   ShieldCheck,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 import {
   Sidebar,
@@ -25,14 +26,18 @@ import {
 } from "@/components/ui/sidebar";
 
 const items = [
-  { title: "Dashboard", href: "/app", icon: LayoutDashboard },
-  { title: "Components", href: "/app/components", icon: Component },
-  { title: "Settings", href: "/app", icon: Settings },
-];
+  { titleKey: "nav.dashboard", href: "/app", icon: LayoutDashboard },
+  { titleKey: "nav.components", href: "/app/components", icon: Component },
+  { titleKey: "nav.settings", href: "/app", icon: Settings },
+] as const;
 
 export function AppSidebar({ isAdmin = false }: { isAdmin?: boolean }) {
+  const { t } = useTranslation();
   const navItems = isAdmin
-    ? [...items, { title: "Admin", href: "/app/admin", icon: ShieldCheck }]
+    ? [
+        ...items,
+        { titleKey: "nav.admin", href: "/app/admin", icon: ShieldCheck },
+      ]
     : items;
 
   return (
@@ -64,11 +69,11 @@ export function AppSidebar({ isAdmin = false }: { isAdmin?: boolean }) {
           <SidebarGroupContent>
             <SidebarMenu>
               {navItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
+                <SidebarMenuItem key={item.titleKey}>
                   <SidebarMenuButton asChild>
                     <Link href={item.href}>
                       <item.icon />
-                      <span>{item.title}</span>
+                      <span>{t(item.titleKey)}</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

@@ -2,8 +2,8 @@ import { z } from "zod";
 
 /** Ortak auth formlari — web ve mobile ayni validation kurallarini paylasir. */
 export const signInSchema = z.object({
-  email: z.string().email("Gecerli bir e-posta gir"),
-  password: z.string().min(8, "Sifre en az 8 karakter olmali"),
+  email: z.string().email("Geçerli bir e-posta gir"),
+  password: z.string().min(8, "Şifre en az 8 karakter olmalı"),
 });
 
 export const signUpSchema = signInSchema
@@ -11,7 +11,7 @@ export const signUpSchema = signInSchema
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Sifreler eslesmiyor",
+    message: "Şifreler eşleşmiyor",
     path: ["confirmPassword"],
   });
 
