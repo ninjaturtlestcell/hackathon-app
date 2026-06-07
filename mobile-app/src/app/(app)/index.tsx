@@ -20,7 +20,60 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Text } from "@/components/ui/text";
 import { Textarea } from "@/components/ui/textarea";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { EmptyState } from "@/components/ui/empty-state";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Spinner } from "@/components/ui/spinner";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useAuth } from "@/context/auth";
+import { Inbox, Terminal } from "lucide-react-native";
+import { toast } from "sonner-native";
 
 function Section({
   title,
@@ -240,6 +293,190 @@ export default function HomeScreen() {
               />
             )}
           </Field>
+        </Section>
+
+        <Section title="Dialog">
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="outline">
+                <Text>Open dialog</Text>
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Dialog title</DialogTitle>
+                <DialogDescription>Bu bir dialog ornegidir.</DialogDescription>
+              </DialogHeader>
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button>
+                    <Text>Tamam</Text>
+                  </Button>
+                </DialogClose>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        </Section>
+
+        <Section title="Alert Dialog">
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="destructive">
+                <Text>Sil</Text>
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Emin misin?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Bu islem geri alinamaz.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>
+                  <Text>Vazgec</Text>
+                </AlertDialogCancel>
+                <AlertDialogAction>
+                  <Text>Sil</Text>
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        </Section>
+
+        <Section title="Sheet">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline">
+                <Text>Open sheet</Text>
+              </Button>
+            </SheetTrigger>
+            <SheetContent>
+              <SheetHeader>
+                <SheetTitle>Sheet title</SheetTitle>
+                <SheetDescription>Alttan acilan panel.</SheetDescription>
+              </SheetHeader>
+            </SheetContent>
+          </Sheet>
+        </Section>
+
+        <Section title="Dropdown Menu">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline">
+                <Text>Menu</Text>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>Hesap</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <Text>Profil</Text>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Text>Ayarlar</Text>
+              </DropdownMenuItem>
+              <DropdownMenuItem variant="destructive">
+                <Text>Cikis</Text>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </Section>
+
+        <Section title="Popover">
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="outline">
+                <Text>Popover</Text>
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent>
+              <Text>Popover icerigi burada.</Text>
+            </PopoverContent>
+          </Popover>
+        </Section>
+
+        <Section title="Tooltip">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="outline">
+                <Text>Bas / tut</Text>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <Text>Tooltip metni</Text>
+            </TooltipContent>
+          </Tooltip>
+        </Section>
+
+        <Section title="Toast">
+          <Row>
+            <Cap label="default">
+              <Button variant="outline" onPress={() => toast("Kaydedildi")}>
+                <Text>Toast</Text>
+              </Button>
+            </Cap>
+            <Cap label="success">
+              <Button
+                variant="outline"
+                onPress={() => toast.success("Basarili")}
+              >
+                <Text>Success</Text>
+              </Button>
+            </Cap>
+            <Cap label="error">
+              <Button
+                variant="outline"
+                onPress={() => toast.error("Hata olustu")}
+              >
+                <Text>Error</Text>
+              </Button>
+            </Cap>
+          </Row>
+        </Section>
+
+        <Section title="Alert">
+          <Alert icon={Terminal}>
+            <AlertTitle>Bilgi</AlertTitle>
+            <AlertDescription>
+              Bu bir bilgilendirme uyarisidir.
+            </AlertDescription>
+          </Alert>
+          <Alert icon={Terminal} variant="destructive">
+            <AlertTitle>Hata</AlertTitle>
+            <AlertDescription>Bir seyler ters gitti.</AlertDescription>
+          </Alert>
+        </Section>
+
+        <Section title="Spinner">
+          <Row>
+            <Spinner />
+            <Spinner size={24} />
+            <Spinner size={32} className="text-primary" />
+          </Row>
+        </Section>
+
+        <Section title="Skeleton">
+          <View className="flex-row items-center gap-3">
+            <Skeleton className="h-10 w-10 rounded-full" />
+            <View className="gap-2">
+              <Skeleton className="h-4 w-40" />
+              <Skeleton className="h-4 w-24" />
+            </View>
+          </View>
+        </Section>
+
+        <Section title="Empty State">
+          <EmptyState
+            icon={Inbox}
+            title="Henuz kayit yok"
+            description="Ilk kaydini olusturarak basla."
+            action={
+              <Button size="sm">
+                <Text>Olustur</Text>
+              </Button>
+            }
+          />
         </Section>
       </ScrollView>
     </SafeAreaView>

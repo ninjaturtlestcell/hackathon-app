@@ -12,6 +12,8 @@ import {
 } from "expo-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { PortalHost } from "@rn-primitives/portal";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { Toaster } from "sonner-native";
 import { useFonts } from "expo-font";
 import {
   PlusJakartaSans_400Regular,
@@ -73,10 +75,14 @@ export default function RootLayout() {
   if (!fontsLoaded && !fontError) return null;
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <RootNavigator />
-      </AuthProvider>
-    </QueryClientProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <RootNavigator />
+        </AuthProvider>
+      </QueryClientProvider>
+      {/* toast host (sonner-native) */}
+      <Toaster />
+    </GestureHandlerRootView>
   );
 }
