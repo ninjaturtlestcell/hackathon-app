@@ -71,9 +71,55 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { DataTable, type Column } from "@/components/ui/data-table";
+import { Progress } from "@/components/ui/progress";
+import { Separator } from "@/components/ui/separator";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs";
 import { useAuth } from "@/context/auth";
 import { Inbox, Terminal } from "lucide-react-native";
 import { toast } from "sonner-native";
+
+type Person = { id: string; name: string; status: "active" | "invited" };
+
+const people: Person[] = [
+  { id: "1", name: "Ada Lovelace", status: "active" },
+  { id: "2", name: "Alan Turing", status: "active" },
+  { id: "3", name: "Grace Hopper", status: "invited" },
+];
+
+const personColumns: Column<Person>[] = [
+  { key: "name", header: "Name" },
+  {
+    key: "status",
+    header: "Status",
+    render: (row) => (
+      <Badge variant={row.status === "active" ? "default" : "secondary"}>
+        <Text>{row.status}</Text>
+      </Badge>
+    ),
+  },
+];
 
 function Section({
   title,
@@ -113,6 +159,7 @@ export default function HomeScreen() {
   const [switchOn, setSwitchOn] = useState(false);
   const [radio, setRadio] = useState("a");
   const [fruit, setFruit] = useState<Option | undefined>(undefined);
+  const [tab, setTab] = useState("account");
 
   return (
     <SafeAreaView className="flex-1 bg-background" edges={["top"]}>
@@ -477,6 +524,135 @@ export default function HomeScreen() {
               </Button>
             }
           />
+        </Section>
+
+        <Section title="Card">
+          <Card>
+            <CardHeader>
+              <CardTitle>Card title</CardTitle>
+              <CardDescription>Card aciklamasi burada.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Text className="text-muted-foreground font-sans text-sm">
+                Kart govde icerigi.
+              </Text>
+            </CardContent>
+            <CardFooter>
+              <Button size="sm">
+                <Text>Aksiyon</Text>
+              </Button>
+            </CardFooter>
+          </Card>
+        </Section>
+
+        <Section title="Badge">
+          <Row>
+            <Cap label="default">
+              <Badge>
+                <Text>Default</Text>
+              </Badge>
+            </Cap>
+            <Cap label="secondary">
+              <Badge variant="secondary">
+                <Text>Secondary</Text>
+              </Badge>
+            </Cap>
+            <Cap label="destructive">
+              <Badge variant="destructive">
+                <Text>Destructive</Text>
+              </Badge>
+            </Cap>
+            <Cap label="outline">
+              <Badge variant="outline">
+                <Text>Outline</Text>
+              </Badge>
+            </Cap>
+          </Row>
+        </Section>
+
+        <Section title="Avatar">
+          <Row>
+            <Cap label="image">
+              <Avatar alt="Kullanici avatari">
+                <AvatarImage
+                  source={{ uri: "https://github.com/shadcn.png" }}
+                />
+                <AvatarFallback>
+                  <Text>CN</Text>
+                </AvatarFallback>
+              </Avatar>
+            </Cap>
+            <Cap label="fallback">
+              <Avatar alt="Kullanici avatari">
+                <AvatarFallback>
+                  <Text>TR</Text>
+                </AvatarFallback>
+              </Avatar>
+            </Cap>
+          </Row>
+        </Section>
+
+        <Section title="Accordion">
+          <Accordion type="single" collapsible>
+            <AccordionItem value="a">
+              <AccordionTrigger>
+                <Text>Birinci soru?</Text>
+              </AccordionTrigger>
+              <AccordionContent>
+                <Text className="font-sans">Birinci cevap.</Text>
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="b">
+              <AccordionTrigger>
+                <Text>Ikinci soru?</Text>
+              </AccordionTrigger>
+              <AccordionContent>
+                <Text className="font-sans">Ikinci cevap.</Text>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </Section>
+
+        <Section title="Tabs">
+          <Tabs value={tab} onValueChange={setTab}>
+            <TabsList>
+              <TabsTrigger value="account">
+                <Text>Hesap</Text>
+              </TabsTrigger>
+              <TabsTrigger value="password">
+                <Text>Sifre</Text>
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="account">
+              <Text className="text-muted-foreground font-sans text-sm">
+                Hesap ayarlari.
+              </Text>
+            </TabsContent>
+            <TabsContent value="password">
+              <Text className="text-muted-foreground font-sans text-sm">
+                Sifre ayarlari.
+              </Text>
+            </TabsContent>
+          </Tabs>
+        </Section>
+
+        <Section title="Progress">
+          <View className="gap-3">
+            <Progress value={30} />
+            <Progress value={66} />
+          </View>
+        </Section>
+
+        <Section title="Separator">
+          <View className="gap-3">
+            <Text className="font-sans text-sm text-foreground">Ust</Text>
+            <Separator />
+            <Text className="font-sans text-sm text-foreground">Alt</Text>
+          </View>
+        </Section>
+
+        <Section title="DataTable">
+          <DataTable columns={personColumns} data={people} />
         </Section>
       </ScrollView>
     </SafeAreaView>
