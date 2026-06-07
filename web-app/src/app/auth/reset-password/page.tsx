@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 
+import { AuthSplitLayout } from "@/components/auth-split-layout";
 import { Button } from "@/components/ui/button";
 import { Field } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
@@ -36,7 +37,7 @@ export default function ResetPasswordPage() {
   });
 
   return (
-    <main className="flex flex-1 items-center justify-center px-6 py-20">
+    <AuthSplitLayout>
       <div className="flex w-full max-w-sm flex-col gap-4">
         <div className="flex flex-col gap-1">
           <h1 className="text-2xl font-bold tracking-tight">Sifre sifirlama</h1>
@@ -75,6 +76,6 @@ export default function ResetPasswordPage() {
           <Link href="/login">Girise don</Link>
         </Button>
       </div>
-    </main>
+    </AuthSplitLayout>
   );
 }
