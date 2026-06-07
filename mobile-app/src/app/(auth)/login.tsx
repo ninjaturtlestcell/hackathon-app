@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ActivityIndicator, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useRouter } from "expo-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -15,6 +16,7 @@ type Mode = "signin" | "signup";
 
 export default function LoginScreen() {
   const { signIn, signUp } = useAuth();
+  const router = useRouter();
   const [mode, setMode] = useState<Mode>("signin");
   const [serverError, setServerError] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
@@ -97,6 +99,15 @@ export default function LoginScreen() {
           <Text>{mode === "signin" ? "Giris yap" : "Kayit ol"}</Text>
         </Button>
         {form.formState.isSubmitting ? <ActivityIndicator /> : null}
+
+        {mode === "signin" ? (
+          <Button
+            variant="ghost"
+            onPress={() => router.push("/reset-password")}
+          >
+            <Text>Sifremi unuttum</Text>
+          </Button>
+        ) : null}
 
         <Button
           variant="ghost"

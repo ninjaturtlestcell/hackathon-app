@@ -16,6 +16,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Toaster } from "sonner-native";
 import { useColorScheme } from "nativewind";
 import { I18nextProvider } from "react-i18next";
+import * as Linking from "expo-linking";
 import { useFonts } from "expo-font";
 import {
   PlusJakartaSans_400Regular,
@@ -28,7 +29,37 @@ import {
 import { AnimatedSplashOverlay } from "@/components/animated-icon";
 import { AuthProvider, useAuth } from "@/context/auth";
 import i18n from "@/lib/i18n";
+import { supabase } from "@/lib/supabase";
 import { loadStoredTheme } from "@/lib/theme";
+
+/**
+ * Email/recovery deep link'lerini isler:
+ * - `?code=` -> exchangeCodeForSession (PKCE)
+ * - PASSWORD_RECOVERY olayinda sifre guncelleme ekranina yonlendir.
+ */
+function useAuthDeepLinks() {
+  const router = useRouter();
+  const url = Linking.useURL();
+
+  useEffect(() => {
+    if (!url) return;
+    const code = Linking.parse(url).queryParams?.code;
+    if (typeof code === "string") {
+      void supabase.auth.exchangeCodeForSession(code);
+    }
+  }, [url]);
+
+  useEffect(() => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event) => {
+      if (event === "PASSWORD_RECOVERY") {
+        router.replace("/update-password");
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [router]);
+}
 
 /**
  * Auth degilse login'e, login'deyken auth olduysa uygulamaya yonlendirir.
@@ -42,10 +73,12 @@ function useProtectedRoute() {
   useEffect(() => {
     if (isLoading) return;
     const inAuthGroup = segments[0] === "(auth)";
+    // Recovery oturumu aktifken sifre guncelleme ekranindan atma.
+    const isRecoveryScreen = segments[1] === "update-password";
 
     if (!session && !inAuthGroup) {
       router.replace("/login");
-    } else if (session && inAuthGroup) {
+    } else if (session && inAuthGroup && !isRecoveryScreen) {
       router.replace("/");
     }
   }, [session, isLoading, segments, router]);
@@ -53,6 +86,7 @@ function useProtectedRoute() {
 
 function RootNavigator() {
   useProtectedRoute();
+  useAuthDeepLinks();
   const { colorScheme } = useColorScheme();
 
   return (

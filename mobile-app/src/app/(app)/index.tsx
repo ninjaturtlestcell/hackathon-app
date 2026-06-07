@@ -99,7 +99,9 @@ import {
 import { LanguageToggle } from "@/components/language-toggle";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useAuth } from "@/context/auth";
-import { Inbox, Terminal } from "lucide-react-native";
+import { supabase } from "@/lib/supabase";
+import { useUserRole } from "@shared/lib";
+import { Inbox, ShieldCheck, Terminal } from "lucide-react-native";
 import { toast } from "sonner-native";
 import { useTranslation } from "react-i18next";
 
@@ -157,6 +159,7 @@ function Cap({ label, children }: { label: string; children: React.ReactNode }) 
 export default function HomeScreen() {
   const { user, signOut } = useAuth();
   const { t } = useTranslation();
+  const { data: role } = useUserRole(supabase);
   const form = useForm<{ sample: string }>({ defaultValues: { sample: "" } });
 
   const [checked, setChecked] = useState(false);
@@ -186,6 +189,22 @@ export default function HomeScreen() {
           <ThemeToggle />
           <LanguageToggle />
         </View>
+
+        <Section title="RBAC (rol)">
+          <Row>
+            <Badge variant={role === "admin" ? "default" : "secondary"}>
+              <Text>{role ?? "-"}</Text>
+            </Badge>
+          </Row>
+          {role === "admin" ? (
+            <Alert icon={ShieldCheck}>
+              <AlertTitle>Admin alani</AlertTitle>
+              <AlertDescription>
+                Bu blogu yalniz admin rolu goruyor (RBAC).
+              </AlertDescription>
+            </Alert>
+          ) : null}
+        </Section>
 
         <Section title="Button — variant">
           <Row>
