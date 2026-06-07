@@ -1,17 +1,14 @@
 {
   "mcpServers": {
     "supabase": {
-      "command": "npx",
+      "command": "pnpm",
       "args": [
-        "-y",
-        "dotenv-cli",
+        "exec",
+        "dotenv",
         "-e",
         ".env.supabase",
         "--",
-        "npx",
-        "-y",
-        "@supabase/mcp-server-supabase@latest",
-        "--read-only",
+        "mcp-server-supabase",
         "--project-ref=onlhpjgqcxcraksddarc"
       ]
     }

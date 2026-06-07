@@ -12,8 +12,12 @@
     "typecheck": "turbo run typecheck"
   },
   "devDependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@supabase/mcp-server-supabase": "^0.8.1",
+    "dotenv-cli": "^11.0.0",
     "turbo": "^2.5.0",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "zod": "^4.4.3"
   },
   "engines": {
     "node": ">=20"
