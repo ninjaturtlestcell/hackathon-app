@@ -98,12 +98,33 @@ import {
 } from "@/components/ui/tabs";
 import { LanguageToggle } from "@/components/language-toggle";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { useColorScheme } from "nativewind";
+import { BarChart } from "react-native-gifted-charts";
+
+import { DateRangeCalendar } from "@/components/ui/date-range-calendar";
+import { StatCard } from "@/components/ui/stat-card";
 import { useAuth } from "@/context/auth";
 import { supabase } from "@/lib/supabase";
 import { useUserRole } from "@shared/lib";
-import { Inbox, ShieldCheck, Terminal } from "lucide-react-native";
+import {
+  Activity,
+  DollarSign,
+  Inbox,
+  ShieldCheck,
+  Terminal,
+  Users,
+} from "lucide-react-native";
 import { toast } from "sonner-native";
 import { useTranslation } from "react-i18next";
+
+const chartData = [
+  { value: 1200, label: "Oca" },
+  { value: 2100, label: "Sub" },
+  { value: 1800, label: "Mar" },
+  { value: 2600, label: "Nis" },
+  { value: 2400, label: "May" },
+  { value: 3200, label: "Haz" },
+];
 
 type Person = { id: string; name: string; status: "active" | "invited" };
 
@@ -160,6 +181,8 @@ export default function HomeScreen() {
   const { user, signOut } = useAuth();
   const { t } = useTranslation();
   const { data: role } = useUserRole(supabase);
+  const { colorScheme } = useColorScheme();
+  const axisColor = colorScheme === "dark" ? "#a1a1aa" : "#71717a";
   const form = useForm<{ sample: string }>({ defaultValues: { sample: "" } });
 
   const [checked, setChecked] = useState(false);
@@ -687,6 +710,51 @@ export default function HomeScreen() {
           <Text className="font-sans text-sm text-foreground">
             {t("demo.greeting")}
           </Text>
+        </Section>
+
+        <Section title="Stat Cards">
+          <Row>
+            <StatCard
+              title="Gelir"
+              value="$12.4k"
+              delta={{ label: "+12%", positive: true }}
+              icon={DollarSign}
+            />
+            <StatCard
+              title="Kullanici"
+              value="1,240"
+              delta={{ label: "+3.1%", positive: true }}
+              icon={Users}
+            />
+          </Row>
+          <Row>
+            <StatCard
+              title="Aktif"
+              value="312"
+              delta={{ label: "-1.2%", positive: false }}
+              icon={Activity}
+            />
+          </Row>
+        </Section>
+
+        <Section title="Chart (bar)">
+          <BarChart
+            data={chartData}
+            height={160}
+            barWidth={18}
+            spacing={18}
+            frontColor="#6366f1"
+            yAxisThickness={0}
+            xAxisThickness={0}
+            hideRules
+            noOfSections={3}
+            xAxisLabelTextStyle={{ color: axisColor, fontSize: 10 }}
+            yAxisTextStyle={{ color: axisColor, fontSize: 10 }}
+          />
+        </Section>
+
+        <Section title="Date Range Picker">
+          <DateRangeCalendar />
         </Section>
       </ScrollView>
     </SafeAreaView>
