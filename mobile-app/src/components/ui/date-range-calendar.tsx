@@ -47,12 +47,21 @@ LocaleConfig.locales.tr = {
 
 type Range = { start?: string; end?: string };
 
+// Lokal tarih -> "YYYY-MM-DD" (toISOString UTC'ye cevirip gun kaydirdigi icin
+// kullanilmaz).
+function toLocalKey(d: Date): string {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
 function eachDay(start: string, end: string): string[] {
   const out: string[] = [];
   const cur = new Date(`${start}T00:00:00`);
   const last = new Date(`${end}T00:00:00`);
   while (cur <= last) {
-    out.push(cur.toISOString().slice(0, 10));
+    out.push(toLocalKey(cur));
     cur.setDate(cur.getDate() + 1);
   }
   return out;
