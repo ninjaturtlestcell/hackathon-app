@@ -17,6 +17,7 @@ const en = {
     home: "Home",
     dashboard: "Dashboard",
     components: "Components",
+    profile: "Profile",
     settings: "Settings",
     admin: "Admin",
   },
@@ -55,6 +56,15 @@ const en = {
   components: {
     title: "Components",
     subtitle: "The design system's components and their variants.",
+  },
+  profile: {
+    title: "Profile",
+    subtitle: "Manage your profile.",
+    fullName: "Full name",
+    fullNamePlaceholder: "Your name",
+    changeAvatar: "Change photo",
+    saved: "Profile updated",
+    uploadError: "Upload failed",
   },
   admin: {
     title: "Admin",
@@ -98,6 +108,7 @@ const tr: typeof en = {
     home: "Ana Sayfa",
     dashboard: "Panel",
     components: "Bileşenler",
+    profile: "Profil",
     settings: "Ayarlar",
     admin: "Admin",
   },
@@ -137,6 +148,15 @@ const tr: typeof en = {
   components: {
     title: "Bileşenler",
     subtitle: "Tasarım sisteminin bileşenleri ve variant'ları.",
+  },
+  profile: {
+    title: "Profil",
+    subtitle: "Profilini yönet.",
+    fullName: "Ad soyad",
+    fullNamePlaceholder: "Adın",
+    changeAvatar: "Fotoğraf değiştir",
+    saved: "Profil güncellendi",
+    uploadError: "Yükleme başarısız",
   },
   admin: {
     title: "Admin",

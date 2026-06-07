@@ -9,6 +9,7 @@ import {
   LayoutDashboard,
   Settings,
   ShieldCheck,
+  User,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
@@ -28,6 +29,7 @@ import {
 const items = [
   { titleKey: "nav.dashboard", href: "/app", icon: LayoutDashboard },
   { titleKey: "nav.components", href: "/app/components", icon: Component },
+  { titleKey: "nav.profile", href: "/app/profile", icon: User },
   { titleKey: "nav.settings", href: "/app", icon: Settings },
 ] as const;
 
