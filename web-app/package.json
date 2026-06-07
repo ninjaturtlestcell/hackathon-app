@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.4.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@shared/assets": "workspace:*",
     "@shared/lib": "workspace:*",
@@ -24,9 +25,12 @@
     "lucide-react": "^0.460.0",
     "next": "16.2.7",
     "next-themes": "^0.4.6",
+    "radix-ui": "^1.5.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "tailwind-merge": "^2.5.4"
+    "react-hook-form": "^7.77.0",
+    "tailwind-merge": "^2.5.4",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

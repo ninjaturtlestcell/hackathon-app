@@ -11,6 +11,7 @@ import {
   useSegments,
 } from "expo-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { PortalHost } from "@rn-primitives/portal";
 import { useFonts } from "expo-font";
 import {
   PlusJakartaSans_400Regular,
@@ -52,6 +53,8 @@ function RootNavigator() {
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <AnimatedSplashOverlay />
       <Stack screenOptions={{ headerShown: false }} />
+      {/* select/dialog gibi overlay bilesenlerinin portal hedefi */}
+      <PortalHost />
     </ThemeProvider>
   );
 }

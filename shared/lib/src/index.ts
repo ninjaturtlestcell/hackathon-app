@@ -1,6 +1,12 @@
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
 export * from "./hooks/use-session";
 
-/** Tailwind class'larini guvenle birlestirmek icin (web + mobile ortak). */
-export function cn(...classes: Array<string | undefined | null | false>) {
-  return classes.filter(Boolean).join(" ");
+/**
+ * Tailwind/NativeWind class'larini birlestirir ve cakisan utility'leri
+ * dogru sekilde override eder (clsx + tailwind-merge). Web + mobile ortak.
+ */
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
 }

@@ -2,11 +2,14 @@
 
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button } from "@/components/ui/button";
+import { Field } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { createClient } from "@/lib/supabase/client";
-import { signInSchema } from "@shared/schemas";
+import { signInSchema, type SignInInput } from "@shared/schemas";
 
 type Mode = "signin" | "signup";
 
@@ -16,46 +19,35 @@ export function LoginForm() {
   const returnUrl = searchParams.get("returnUrl") ?? "/app";
 
   const [mode, setMode] = useState<Mode>("signin");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  const [serverError, setServerError] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
 
-  async function onSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setError(null);
+  const form = useForm<SignInInput>({
+    resolver: zodResolver(signInSchema),
+    defaultValues: { email: "", password: "" },
+  });
+
+  const onSubmit = form.handleSubmit(async ({ email, password }) => {
+    setServerError(null);
     setInfo(null);
 
-    const parsed = signInSchema.safeParse({ email, password });
-    if (!parsed.success) {
-      setError(parsed.error.issues[0]?.message ?? "Gecersiz giris");
-      return;
-    }
-
-    setLoading(true);
     const supabase = createClient();
     const { error } =
       mode === "signin"
         ? await supabase.auth.signInWithPassword({ email, password })
         : await supabase.auth.signUp({ email, password });
-    setLoading(false);
 
     if (error) {
-      setError(error.message);
+      setServerError(error.message);
       return;
     }
-
     if (mode === "signup") {
       setInfo("Kayit alindi. E-postani dogrulaman gerekebilir.");
       return;
     }
-
-    // Basarili giris -> returnUrl'e (yoksa /app) don. refresh, sunucu
-    // bilesenlerinin yeni oturumu gormesi icin gerekli.
     router.replace(returnUrl);
     router.refresh();
-  }
+  });
 
   return (
     <form onSubmit={onSubmit} className="flex w-full max-w-sm flex-col gap-4">
@@ -68,33 +60,50 @@ export function LoginForm() {
         </p>
       </div>
 
-      <Input
-        type="email"
-        placeholder="E-posta"
-        autoComplete="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <Input
-        type="password"
-        placeholder="Sifre"
-        autoComplete={mode === "signin" ? "current-password" : "new-password"}
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+      <Field control={form.control} name="email" label="E-posta">
+        {({ field, fieldState, id }) => (
+          <Input
+            id={id}
+            type="email"
+            autoComplete="email"
+            placeholder="ornek@eposta.com"
+            aria-invalid={!!fieldState.error}
+            {...field}
+          />
+        )}
+      </Field>
 
-      {error ? <p className="text-sm text-destructive">{error}</p> : null}
+      <Field control={form.control} name="password" label="Sifre">
+        {({ field, fieldState, id }) => (
+          <Input
+            id={id}
+            type="password"
+            autoComplete={mode === "signin" ? "current-password" : "new-password"}
+            placeholder="********"
+            aria-invalid={!!fieldState.error}
+            {...field}
+          />
+        )}
+      </Field>
+
+      {serverError ? (
+        <p className="text-sm text-destructive">{serverError}</p>
+      ) : null}
       {info ? <p className="text-sm text-muted-foreground">{info}</p> : null}
 
-      <Button type="submit" disabled={loading}>
-        {loading ? "..." : mode === "signin" ? "Giris yap" : "Kayit ol"}
+      <Button type="submit" disabled={form.formState.isSubmitting}>
+        {form.formState.isSubmitting
+          ? "..."
+          : mode === "signin"
+            ? "Giris yap"
+            : "Kayit ol"}
       </Button>
 
       <Button
         type="button"
         variant="ghost"
         onClick={() => {
-          setError(null);
+          setServerError(null);
           setInfo(null);
           setMode((m) => (m === "signin" ? "signup" : "signin"));
         }}
