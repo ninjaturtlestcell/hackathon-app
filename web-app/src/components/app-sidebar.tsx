@@ -1,6 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
+import logoLight from "@shared/assets/logo-light.png";
+import logoDark from "@shared/assets/logo-dark.png";
 import {
   Component,
   LayoutDashboard,
@@ -35,8 +38,24 @@ export function AppSidebar({ isAdmin = false }: { isAdmin?: boolean }) {
   return (
     <Sidebar>
       <SidebarHeader className="px-4 py-3">
-        <Link href="/app" className="text-lg font-bold tracking-tight">
-          Turtle
+        <Link href="/app" className="flex items-center">
+          {/* logo 943x240 (~3.93:1) — temaya gore degisir */}
+          <Image
+            src={logoLight}
+            alt="Turtle"
+            width={110}
+            height={28}
+            className="h-7 w-auto dark:hidden"
+            priority
+          />
+          <Image
+            src={logoDark}
+            alt="Turtle"
+            width={110}
+            height={28}
+            className="hidden h-7 w-auto dark:block"
+            priority
+          />
         </Link>
       </SidebarHeader>
       <SidebarContent>
