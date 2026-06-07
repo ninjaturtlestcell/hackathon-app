@@ -23,7 +23,7 @@ import {
 
 const items = [
   { title: "Dashboard", href: "/app", icon: LayoutDashboard },
-  { title: "Components", href: "/app", icon: Component },
+  { title: "Components", href: "/app/components", icon: Component },
   { title: "Settings", href: "/app", icon: Settings },
 ];
 
