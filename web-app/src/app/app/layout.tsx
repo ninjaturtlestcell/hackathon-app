@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { AppSidebar } from "@/components/app-sidebar";
 import { LanguageToggle } from "@/components/language-toggle";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -11,6 +12,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { createClient } from "@/lib/supabase/server";
+import { getUserRole } from "@/lib/supabase/role";
 
 // /app ve altindaki tum route'lar korumali. Middleware zaten guard yapiyor;
 // burada sunucu tarafinda ikinci bir savunma katmani + kullanici bilgisi.
@@ -28,6 +30,8 @@ export default async function AppLayout({
     redirect("/login?returnUrl=/app");
   }
 
+  const role = await getUserRole();
+
   async function signOut() {
     "use server";
     const supabase = await createClient();
@@ -37,7 +41,7 @@ export default async function AppLayout({
 
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar isAdmin={role === "admin"} />
       <SidebarInset>
         <header className="flex h-14 shrink-0 items-center justify-between gap-2 border-b px-4">
           <div className="flex items-center gap-2">
@@ -46,6 +50,11 @@ export default async function AppLayout({
             <span className="text-sm font-medium">Dashboard</span>
           </div>
           <div className="flex items-center gap-2">
+            {role ? (
+              <Badge variant={role === "admin" ? "default" : "secondary"}>
+                {role}
+              </Badge>
+            ) : null}
             <LanguageToggle />
             <ThemeToggle />
             <span className="ml-1 hidden text-sm text-muted-foreground sm:inline">

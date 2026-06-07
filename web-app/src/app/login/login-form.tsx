@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -35,7 +36,13 @@ export function LoginForm() {
     const { error } =
       mode === "signin"
         ? await supabase.auth.signInWithPassword({ email, password })
-        : await supabase.auth.signUp({ email, password });
+        : await supabase.auth.signUp({
+            email,
+            password,
+            options: {
+              emailRedirectTo: `${window.location.origin}/auth/confirm?next=/app`,
+            },
+          });
 
     if (error) {
       setServerError(error.message);
@@ -85,6 +92,15 @@ export function LoginForm() {
           />
         )}
       </Field>
+
+      {mode === "signin" ? (
+        <Link
+          href="/auth/reset-password"
+          className="-mt-1 self-end text-sm text-muted-foreground hover:underline"
+        >
+          Sifremi unuttum
+        </Link>
+      ) : null}
 
       {serverError ? (
         <p className="text-sm text-destructive">{serverError}</p>

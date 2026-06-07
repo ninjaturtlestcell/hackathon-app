@@ -1,7 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { Component, LayoutDashboard, Settings } from "lucide-react";
+import {
+  Component,
+  LayoutDashboard,
+  Settings,
+  ShieldCheck,
+} from "lucide-react";
 
 import {
   Sidebar,
@@ -22,7 +27,11 @@ const items = [
   { title: "Settings", href: "/app", icon: Settings },
 ];
 
-export function AppSidebar() {
+export function AppSidebar({ isAdmin = false }: { isAdmin?: boolean }) {
+  const navItems = isAdmin
+    ? [...items, { title: "Admin", href: "/app/admin", icon: ShieldCheck }]
+    : items;
+
   return (
     <Sidebar>
       <SidebarHeader className="px-4 py-3">
@@ -35,7 +44,7 @@ export function AppSidebar() {
           <SidebarGroupLabel>Menu</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {items.map((item) => (
+              {navItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <Link href={item.href}>

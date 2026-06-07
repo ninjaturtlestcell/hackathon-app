@@ -235,6 +235,9 @@ importers:
       '@shared/supabase':
         specifier: workspace:*
         version: link:../supabase
+      '@supabase/supabase-js':
+        specifier: ^2.45.0
+        version: 2.107.0
       '@tanstack/react-query':
         specifier: ^5.59.0
         version: 5.101.0(react@19.2.4)
@@ -8807,9 +8810,7 @@ snapshots:
       metro-runtime: 0.84.4
     transitivePeerDependencies:
       - '@babel/core'
-      - bufferutil
       - supports-color
-      - utf-8-validate
 
   '@react-native/normalize-colors@0.74.89': {}
 
