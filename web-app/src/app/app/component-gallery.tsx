@@ -68,7 +68,85 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
 import { EmptyState } from "@/components/ui/empty-state";
 import { toast } from "sonner";
-import { Inbox, Terminal } from "lucide-react";
+import { ArrowUpDown, Inbox, Terminal } from "lucide-react";
+import { type ColumnDef } from "@tanstack/react-table";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Progress } from "@/components/ui/progress";
+import { Separator } from "@/components/ui/separator";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+import { DataTable } from "@/components/ui/data-table";
+
+type Person = {
+  id: string;
+  name: string;
+  email: string;
+  status: "active" | "invited";
+};
+
+const people: Person[] = [
+  { id: "1", name: "Ada Lovelace", email: "ada@example.com", status: "active" },
+  { id: "2", name: "Alan Turing", email: "alan@example.com", status: "active" },
+  { id: "3", name: "Grace Hopper", email: "grace@example.com", status: "invited" },
+  { id: "4", name: "Linus T.", email: "linus@example.com", status: "active" },
+  { id: "5", name: "Margaret H.", email: "margaret@example.com", status: "invited" },
+  { id: "6", name: "Dennis R.", email: "dennis@example.com", status: "active" },
+];
+
+const peopleColumns: ColumnDef<Person>[] = [
+  {
+    accessorKey: "name",
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Name <ArrowUpDown className="ml-1 size-3" />
+      </Button>
+    ),
+  },
+  { accessorKey: "email", header: "Email" },
+  {
+    accessorKey: "status",
+    header: "Status",
+    cell: ({ row }) => (
+      <Badge variant={row.original.status === "active" ? "default" : "secondary"}>
+        {row.original.status}
+      </Badge>
+    ),
+  },
+];
 
 function Section({
   title,
@@ -397,6 +475,144 @@ export function ComponentGallery() {
           action={<Button size="sm">Olustur</Button>}
           className="w-full max-w-md"
         />
+      </Section>
+
+      <Section title="Card">
+        <Card className="w-72">
+          <CardHeader>
+            <CardTitle>Card title</CardTitle>
+            <CardDescription>Card aciklamasi burada.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-muted-foreground">
+              Kart govde icerigi.
+            </p>
+          </CardContent>
+          <CardFooter>
+            <Button size="sm">Aksiyon</Button>
+          </CardFooter>
+        </Card>
+      </Section>
+
+      <Section title="Badge">
+        <Variant label="default">
+          <Badge>Default</Badge>
+        </Variant>
+        <Variant label="secondary">
+          <Badge variant="secondary">Secondary</Badge>
+        </Variant>
+        <Variant label="destructive">
+          <Badge variant="destructive">Destructive</Badge>
+        </Variant>
+        <Variant label="outline">
+          <Badge variant="outline">Outline</Badge>
+        </Variant>
+      </Section>
+
+      <Section title="Avatar">
+        <Variant label="image">
+          <Avatar>
+            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+        </Variant>
+        <Variant label="fallback">
+          <Avatar>
+            <AvatarFallback>TR</AvatarFallback>
+          </Avatar>
+        </Variant>
+      </Section>
+
+      <Section title="Accordion">
+        <Accordion type="single" collapsible className="w-72">
+          <AccordionItem value="a">
+            <AccordionTrigger>Birinci soru?</AccordionTrigger>
+            <AccordionContent>Birinci cevap.</AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="b">
+            <AccordionTrigger>Ikinci soru?</AccordionTrigger>
+            <AccordionContent>Ikinci cevap.</AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </Section>
+
+      <Section title="Tabs">
+        <Tabs defaultValue="account" className="w-72">
+          <TabsList>
+            <TabsTrigger value="account">Hesap</TabsTrigger>
+            <TabsTrigger value="password">Sifre</TabsTrigger>
+          </TabsList>
+          <TabsContent value="account" className="text-sm text-muted-foreground">
+            Hesap ayarlari.
+          </TabsContent>
+          <TabsContent
+            value="password"
+            className="text-sm text-muted-foreground"
+          >
+            Sifre ayarlari.
+          </TabsContent>
+        </Tabs>
+      </Section>
+
+      <Section title="Progress">
+        <div className="flex w-72 flex-col gap-3">
+          <Progress value={30} />
+          <Progress value={66} />
+        </div>
+      </Section>
+
+      <Section title="Separator">
+        <div className="flex w-72 flex-col gap-3">
+          <span className="text-sm">Ust</span>
+          <Separator />
+          <span className="text-sm">Alt</span>
+        </div>
+      </Section>
+
+      <Section title="Breadcrumb">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/app">Dashboard</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/app">Components</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>Gallery</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      </Section>
+
+      <Section title="Pagination">
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious href="#" />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="#">1</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="#" isActive>
+                2
+              </PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="#">3</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationNext href="#" />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      </Section>
+
+      <Section title="DataTable (sortable + pagination)">
+        <DataTable columns={peopleColumns} data={people} />
       </Section>
     </div>
   );

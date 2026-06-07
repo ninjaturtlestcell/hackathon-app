@@ -1,7 +1,13 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
 
+import { AppSidebar } from "@/components/app-sidebar";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 import { createClient } from "@/lib/supabase/server";
 
 // /app ve altindaki tum route'lar korumali. Middleware zaten guard yapiyor;
@@ -28,21 +34,26 @@ export default async function AppLayout({
   }
 
   return (
-    <div className="flex flex-1 flex-col">
-      <header className="flex items-center justify-between border-b px-6 py-4">
-        <Link href="/app" className="text-lg font-bold tracking-tight">
-          Uygulama
-        </Link>
-        <div className="flex items-center gap-3">
-          <span className="text-sm text-muted-foreground">{user.email}</span>
-          <form action={signOut}>
-            <Button type="submit" variant="outline" size="sm">
-              Cikis yap
-            </Button>
-          </form>
-        </div>
-      </header>
-      <main className="flex flex-1 flex-col p-6">{children}</main>
-    </div>
+    <SidebarProvider>
+      <AppSidebar />
+      <SidebarInset>
+        <header className="flex h-14 shrink-0 items-center justify-between gap-2 border-b px-4">
+          <div className="flex items-center gap-2">
+            <SidebarTrigger />
+            <Separator orientation="vertical" className="h-4" />
+            <span className="text-sm font-medium">Dashboard</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-muted-foreground">{user.email}</span>
+            <form action={signOut}>
+              <Button type="submit" variant="outline" size="sm">
+                Cikis yap
+              </Button>
+            </form>
+          </div>
+        </header>
+        <main className="flex flex-1 flex-col p-6">{children}</main>
+      </SidebarInset>
+    </SidebarProvider>
   );
 }
