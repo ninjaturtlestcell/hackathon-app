@@ -2,8 +2,10 @@
 
 import * as React from "react";
 import { format } from "date-fns";
+import { enUS, tr } from "date-fns/locale";
 import { CalendarIcon } from "lucide-react";
 import type { DateRange } from "react-day-picker";
+import { useTranslation } from "react-i18next";
 
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -25,6 +27,8 @@ export function DateRangePicker({
   onChange,
   className,
 }: DateRangePickerProps) {
+  const { t, i18n } = useTranslation();
+  const locale = i18n.resolvedLanguage === "tr" ? tr : enUS;
   const [internal, setInternal] = React.useState<DateRange | undefined>(value);
   const range = value ?? internal;
 
@@ -48,13 +52,14 @@ export function DateRangePicker({
           {range?.from ? (
             range.to ? (
               <>
-                {format(range.from, "dd LLL y")} - {format(range.to, "dd LLL y")}
+                {format(range.from, "dd LLL y", { locale })} -{" "}
+                {format(range.to, "dd LLL y", { locale })}
               </>
             ) : (
-              format(range.from, "dd LLL y")
+              format(range.from, "dd LLL y", { locale })
             )
           ) : (
-            <span>Tarih araligi sec</span>
+            <span>{t("datePicker.rangePlaceholder")}</span>
           )}
         </Button>
       </PopoverTrigger>
@@ -64,6 +69,7 @@ export function DateRangePicker({
           selected={range}
           onSelect={handleSelect}
           numberOfMonths={2}
+          locale={locale}
           autoFocus
         />
       </PopoverContent>

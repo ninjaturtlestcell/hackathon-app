@@ -1,10 +1,49 @@
 import { useState } from "react";
 import { useColorScheme } from "nativewind";
-import { Calendar, type DateData } from "react-native-calendars";
+import { useTranslation } from "react-i18next";
+import {
+  Calendar,
+  LocaleConfig,
+  type DateData,
+} from "react-native-calendars";
 
 import { Colors } from "@/constants/theme";
 
 const ACCENT = "#6366f1";
+
+LocaleConfig.locales.en = {
+  monthNames: [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December",
+  ],
+  monthNamesShort: [
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+  ],
+  dayNames: [
+    "Sunday", "Monday", "Tuesday", "Wednesday",
+    "Thursday", "Friday", "Saturday",
+  ],
+  dayNamesShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+  today: "Today",
+};
+
+LocaleConfig.locales.tr = {
+  monthNames: [
+    "Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran",
+    "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık",
+  ],
+  monthNamesShort: [
+    "Oca", "Şub", "Mar", "Nis", "May", "Haz",
+    "Tem", "Ağu", "Eyl", "Eki", "Kas", "Ara",
+  ],
+  dayNames: [
+    "Pazar", "Pazartesi", "Salı", "Çarşamba",
+    "Perşembe", "Cuma", "Cumartesi",
+  ],
+  dayNamesShort: ["Paz", "Pzt", "Sal", "Çar", "Per", "Cum", "Cmt"],
+  today: "Bugün",
+};
 
 type Range = { start?: string; end?: string };
 
@@ -26,7 +65,9 @@ export function DateRangeCalendar({
   onChange?: (range: Range) => void;
 }) {
   const { colorScheme } = useColorScheme();
+  const { i18n } = useTranslation();
   const colors = Colors[colorScheme === "dark" ? "dark" : "light"];
+  LocaleConfig.defaultLocale = i18n.resolvedLanguage === "tr" ? "tr" : "en";
   const [range, setRange] = useState<Range>({});
 
   function onDayPress(day: DateData) {
@@ -63,6 +104,7 @@ export function DateRangeCalendar({
 
   return (
     <Calendar
+      key={i18n.resolvedLanguage}
       markingType="period"
       markedDates={marked}
       onDayPress={onDayPress}

@@ -46,6 +46,9 @@ const en = {
     title: "i18n & Theme",
     greeting: "Hello! This text is translated.",
   },
+  datePicker: {
+    rangePlaceholder: "Pick a date range",
+  },
 };
 
 const tr: typeof en = {
@@ -82,6 +85,9 @@ const tr: typeof en = {
   demo: {
     title: "i18n & Tema",
     greeting: "Merhaba! Bu metin cevrildi.",
+  },
+  datePicker: {
+    rangePlaceholder: "Tarih araligi sec",
   },
 };
 
