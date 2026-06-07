@@ -1,5 +1,6 @@
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 
 import { LanguageToggle } from "@/components/language-toggle";
@@ -14,6 +15,7 @@ import { useUserRole } from "@shared/lib";
 export default function HomeScreen() {
   const { user, signOut } = useAuth();
   const { t } = useTranslation();
+  const router = useRouter();
   const { data: role } = useUserRole(supabase);
 
   return (
@@ -37,6 +39,10 @@ export default function HomeScreen() {
           <ThemeToggle />
           <LanguageToggle />
         </View>
+
+        <Button variant="outline" onPress={() => router.push("/profile")}>
+          <Text>{t("nav.profile")}</Text>
+        </Button>
 
         <View className="mt-auto">
           <Button variant="outline" onPress={signOut}>

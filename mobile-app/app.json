@@ -37,7 +37,13 @@
           }
         }
       ],
-      "expo-localization"
+      "expo-localization",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Profil fotografi secmek icin galeriye erisim gerekiyor."
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
