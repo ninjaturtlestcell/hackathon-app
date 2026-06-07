@@ -11,6 +11,8 @@ export const palette = {
     foreground: "240 10% 3.9%",
     card: "0 0% 100%",
     cardForeground: "240 10% 3.9%",
+    popover: "0 0% 100%",
+    popoverForeground: "240 10% 3.9%",
     primary: "240 5.9% 10%",
     primaryForeground: "0 0% 98%",
     secondary: "240 4.8% 95.9%",
@@ -30,6 +32,8 @@ export const palette = {
     foreground: "0 0% 98%",
     card: "240 10% 3.9%",
     cardForeground: "0 0% 98%",
+    popover: "240 10% 3.9%",
+    popoverForeground: "0 0% 98%",
     primary: "0 0% 98%",
     primaryForeground: "240 5.9% 10%",
     secondary: "240 3.7% 15.9%",
@@ -82,5 +86,9 @@ export const tailwindColors = {
   card: {
     DEFAULT: "hsl(var(--card))",
     foreground: "hsl(var(--card-foreground))",
+  },
+  popover: {
+    DEFAULT: "hsl(var(--popover))",
+    foreground: "hsl(var(--popover-foreground))",
   },
 } as const;
