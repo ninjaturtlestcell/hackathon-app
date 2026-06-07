@@ -1,6 +1,8 @@
 import { redirect } from "next/navigation";
 
 import { AppSidebar } from "@/components/app-sidebar";
+import { LanguageToggle } from "@/components/language-toggle";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -43,8 +45,12 @@ export default async function AppLayout({
             <Separator orientation="vertical" className="h-4" />
             <span className="text-sm font-medium">Dashboard</span>
           </div>
-          <div className="flex items-center gap-3">
-            <span className="text-sm text-muted-foreground">{user.email}</span>
+          <div className="flex items-center gap-2">
+            <LanguageToggle />
+            <ThemeToggle />
+            <span className="ml-1 hidden text-sm text-muted-foreground sm:inline">
+              {user.email}
+            </span>
             <form action={signOut}>
               <Button type="submit" variant="outline" size="sm">
                 Cikis yap

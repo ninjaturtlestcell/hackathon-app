@@ -36,7 +36,8 @@
             "image": "../shared/assets/icon-dark.png"
           }
         }
-      ]
+      ],
+      "expo-localization"
     ],
     "experiments": {
       "typedRoutes": true,

@@ -106,6 +106,9 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { DataTable } from "@/components/ui/data-table";
+import { useTranslation } from "react-i18next";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { LanguageToggle } from "@/components/language-toggle";
 
 type Person = {
   id: string;
@@ -180,6 +183,7 @@ function Variant({
 
 export function ComponentGallery() {
   const form = useForm<{ sample: string }>({ defaultValues: { sample: "" } });
+  const { t } = useTranslation();
 
   return (
     <div className="flex flex-col">
@@ -613,6 +617,16 @@ export function ComponentGallery() {
 
       <Section title="DataTable (sortable + pagination)">
         <DataTable columns={peopleColumns} data={people} />
+      </Section>
+
+      <Section title={t("demo.title")}>
+        <div className="flex flex-col items-start gap-3">
+          <p className="text-sm">{t("demo.greeting")}</p>
+          <div className="flex items-center gap-2">
+            <LanguageToggle />
+            <ThemeToggle />
+          </div>
+        </div>
       </Section>
     </div>
   );
