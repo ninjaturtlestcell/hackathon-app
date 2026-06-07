@@ -1,7 +1,7 @@
 import "../global.css";
+import "@/lib/i18n";
 
 import { useEffect, useState } from "react";
-import { useColorScheme } from "react-native";
 import {
   DarkTheme,
   DefaultTheme,
@@ -14,6 +14,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { PortalHost } from "@rn-primitives/portal";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Toaster } from "sonner-native";
+import { useColorScheme } from "nativewind";
+import { I18nextProvider } from "react-i18next";
 import { useFonts } from "expo-font";
 import {
   PlusJakartaSans_400Regular,
@@ -25,6 +27,8 @@ import {
 
 import { AnimatedSplashOverlay } from "@/components/animated-icon";
 import { AuthProvider, useAuth } from "@/context/auth";
+import i18n from "@/lib/i18n";
+import { loadStoredTheme } from "@/lib/theme";
 
 /**
  * Auth degilse login'e, login'deyken auth olduysa uygulamaya yonlendirir.
@@ -49,7 +53,7 @@ function useProtectedRoute() {
 
 function RootNavigator() {
   useProtectedRoute();
-  const colorScheme = useColorScheme();
+  const { colorScheme } = useColorScheme();
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
@@ -71,18 +75,25 @@ export default function RootLayout() {
     PlusJakartaSans_800ExtraBold,
   });
 
+  // Saklanan tema tercihini uygula.
+  useEffect(() => {
+    void loadStoredTheme();
+  }, []);
+
   // Fontlar yuklenene kadar (hata olsa bile devam et) native splash gorunur.
   if (!fontsLoaded && !fontError) return null;
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-          <RootNavigator />
-        </AuthProvider>
-      </QueryClientProvider>
-      {/* toast host (sonner-native) */}
-      <Toaster />
+      <I18nextProvider i18n={i18n}>
+        <QueryClientProvider client={queryClient}>
+          <AuthProvider>
+            <RootNavigator />
+          </AuthProvider>
+        </QueryClientProvider>
+        {/* toast host (sonner-native) */}
+        <Toaster />
+      </I18nextProvider>
     </GestureHandlerRootView>
   );
 }

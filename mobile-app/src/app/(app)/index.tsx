@@ -96,9 +96,12 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs";
+import { LanguageToggle } from "@/components/language-toggle";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { useAuth } from "@/context/auth";
 import { Inbox, Terminal } from "lucide-react-native";
 import { toast } from "sonner-native";
+import { useTranslation } from "react-i18next";
 
 type Person = { id: string; name: string; status: "active" | "invited" };
 
@@ -153,6 +156,7 @@ function Cap({ label, children }: { label: string; children: React.ReactNode }) 
 
 export default function HomeScreen() {
   const { user, signOut } = useAuth();
+  const { t } = useTranslation();
   const form = useForm<{ sample: string }>({ defaultValues: { sample: "" } });
 
   const [checked, setChecked] = useState(false);
@@ -174,8 +178,13 @@ export default function HomeScreen() {
             </Text>
           </View>
           <Button variant="outline" size="sm" onPress={signOut}>
-            <Text>Cikis</Text>
+            <Text>{t("auth.signOut")}</Text>
           </Button>
+        </View>
+
+        <View className="flex-row flex-wrap items-center gap-2">
+          <ThemeToggle />
+          <LanguageToggle />
         </View>
 
         <Section title="Button — variant">
@@ -653,6 +662,12 @@ export default function HomeScreen() {
 
         <Section title="DataTable">
           <DataTable columns={personColumns} data={people} />
+        </Section>
+
+        <Section title={t("demo.title")}>
+          <Text className="font-sans text-sm text-foreground">
+            {t("demo.greeting")}
+          </Text>
         </Section>
       </ScrollView>
     </SafeAreaView>
