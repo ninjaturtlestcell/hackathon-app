@@ -113,7 +113,7 @@ export function DateRangeCalendar({
 
   return (
     <Calendar
-      key={i18n.resolvedLanguage}
+      key={`${i18n.resolvedLanguage}-${colorScheme}`}
       markingType="period"
       markedDates={marked}
       onDayPress={onDayPress}
