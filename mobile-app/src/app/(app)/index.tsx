@@ -73,27 +73,44 @@ export default function HomeScreen() {
               {user?.email ?? "-"}
             </Text>
           </View>
-          <Button title="Cikis" variant="outline" size="sm" onPress={signOut} />
+          <Button variant="outline" size="sm" onPress={signOut}>
+            <Text>Cikis</Text>
+          </Button>
         </View>
 
         <Section title="Button — variant">
           <Row>
             <Cap label="default">
-              <Button title="Default" />
+              <Button>
+                <Text>Default</Text>
+              </Button>
             </Cap>
             <Cap label="secondary">
-              <Button title="Secondary" variant="secondary" />
+              <Button variant="secondary">
+                <Text>Secondary</Text>
+              </Button>
             </Cap>
             <Cap label="outline">
-              <Button title="Outline" variant="outline" />
+              <Button variant="outline">
+                <Text>Outline</Text>
+              </Button>
             </Cap>
           </Row>
           <Row>
             <Cap label="destructive">
-              <Button title="Destructive" variant="destructive" />
+              <Button variant="destructive">
+                <Text>Destructive</Text>
+              </Button>
             </Cap>
             <Cap label="ghost">
-              <Button title="Ghost" variant="ghost" />
+              <Button variant="ghost">
+                <Text>Ghost</Text>
+              </Button>
+            </Cap>
+            <Cap label="link">
+              <Button variant="link">
+                <Text>Link</Text>
+              </Button>
             </Cap>
           </Row>
         </Section>
@@ -101,16 +118,24 @@ export default function HomeScreen() {
         <Section title="Button — size">
           <Row>
             <Cap label="sm">
-              <Button title="Small" size="sm" />
+              <Button size="sm">
+                <Text>Small</Text>
+              </Button>
             </Cap>
             <Cap label="default">
-              <Button title="Default" size="default" />
+              <Button size="default">
+                <Text>Default</Text>
+              </Button>
             </Cap>
             <Cap label="lg">
-              <Button title="Large" size="lg" />
+              <Button size="lg">
+                <Text>Large</Text>
+              </Button>
             </Cap>
             <Cap label="disabled">
-              <Button title="Disabled" disabled />
+              <Button disabled>
+                <Text>Disabled</Text>
+              </Button>
             </Cap>
           </Row>
         </Section>

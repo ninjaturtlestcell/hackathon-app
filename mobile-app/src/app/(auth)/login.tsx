@@ -93,26 +93,25 @@ export default function LoginScreen() {
           <Text className="font-sans text-sm text-muted-foreground">{info}</Text>
         ) : null}
 
-        <Button
-          title={mode === "signin" ? "Giris yap" : "Kayit ol"}
-          onPress={onSubmit}
-          disabled={form.formState.isSubmitting}
-        />
+        <Button onPress={onSubmit} disabled={form.formState.isSubmitting}>
+          <Text>{mode === "signin" ? "Giris yap" : "Kayit ol"}</Text>
+        </Button>
         {form.formState.isSubmitting ? <ActivityIndicator /> : null}
 
         <Button
           variant="ghost"
-          title={
-            mode === "signin"
-              ? "Hesabin yok mu? Kayit ol"
-              : "Zaten hesabin var mi? Giris yap"
-          }
           onPress={() => {
             setServerError(null);
             setInfo(null);
             setMode((m) => (m === "signin" ? "signup" : "signin"));
           }}
-        />
+        >
+          <Text>
+            {mode === "signin"
+              ? "Hesabin yok mu? Kayit ol"
+              : "Zaten hesabin var mi? Giris yap"}
+          </Text>
+        </Button>
       </View>
     </SafeAreaView>
   );
