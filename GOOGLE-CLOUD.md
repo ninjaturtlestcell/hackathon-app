@@ -50,13 +50,23 @@ https://console.cloud.google.com/billing
 ### c. Gerekli API'leri aç
 
 ```bash
-gcloud services enable run.googleapis.com artifactregistry.googleapis.com
+gcloud services enable \
+  run.googleapis.com \
+  artifactregistry.googleapis.com \
+  cloudbuild.googleapis.com
 ```
+
+> ⚠️ Cloud Build API'sini **ilk açtıktan sonra** ilk `gcloud builds submit`
+> çağrısı 1-2 dk boyunca `PERMISSION_DENIED` verebilir (IAM/servis-hesabı
+> yayılım gecikmesi). Owner olsan bile olur — birkaç dakika bekleyip tekrar
+> çalıştır, geçer.
 
 ### Gereksinimler
 
-- Docker masaüstü çalışıyor olmalı (imaj yerelde `linux/amd64` olarak build edilir).
 - `web-app/.env` içinde Supabase değerleri dolu olmalı.
+- **Yerel Docker GEREKMEZ** — build, Cloud Build'de (gerçek amd64 donanımı)
+  yapılır. (Apple Silicon'da yerel QEMU emülasyonu Next/Turbopack'i segfault
+  ettirdiği için build buluta taşındı.)
 
 ---
 
@@ -69,9 +79,13 @@ export PROJECT_ID=benim-proje-123
 
 Script şunları yapar:
 1. Artifact Registry deposunu oluşturur (yoksa).
-2. İmajı `linux/amd64` olarak build edip push eder.
+2. `cloudbuild.yaml` ile imajı **Cloud Build'de** build edip Artifact
+   Registry'ye push eder (`NEXT_PUBLIC_*` build-arg olarak `.env`'den geçer).
 3. Cloud Run'a deploy eder (`--allow-unauthenticated`, port 8080).
 4. Sonunda canlı **servis URL'ini** yazar.
+
+İlgili dosyalar: `cloudbuild.yaml` (build adımları), `.gcloudignore`
+(Cloud Build'e yüklenmeyecekler).
 
 ### Ayarları değiştirme (opsiyonel)
 
@@ -101,8 +115,11 @@ login / e-posta onayı / redirect akışları çalışmaz:
 
 **Supabase Dashboard → Authentication → URL Configuration**
 
-- **Site URL:** `https://web-app-xxxxx.europe-west3.run.app`
+- **Site URL:** `https://web-app-303173878476.europe-west3.run.app`
 - **Redirect URLs:** aynı adresi ekle (gerekirse `/**` ile)
+
+> Mevcut canlı dağıtım (proje `ai-hackathon-498718`):
+> **https://web-app-303173878476.europe-west3.run.app**
 
 ---
 
@@ -113,8 +130,10 @@ login / e-posta onayı / redirect akışları çalışmaz:
 - **Build'de "supabase env yok" / boş sayfa:** `web-app/.env` içindeki
   `NEXT_PUBLIC_*` değerleri eksik. Bunlar build anında gömüldüğü için
   deploy'dan önce dolu olmalı.
-- **Docker build platform hatası:** Apple Silicon'da `deploy-web.sh` zaten
-  `--platform linux/amd64` kullanıyor; Docker Desktop'ın açık olduğundan emin ol.
+- **`gcloud builds submit` → PERMISSION_DENIED:** Cloud Build API yeni açıldıysa
+  IAM yayılımı için 1-2 dk bekle ve tekrar dene (Owner olsan bile olabilir).
+- **Build worker SIGSEGV / segfault:** Bu, yerelde QEMU ile amd64 emüle ederken
+  olur. `deploy-web.sh` build'i Cloud Build'e taşıdığı için bu sorun yaşanmaz.
 - **403 / erişim yok:** Servis `--allow-unauthenticated` ile public açılıyor;
   yine de sorun varsa Cloud Run konsolundan "Allow unauthenticated" iznini kontrol et.
 

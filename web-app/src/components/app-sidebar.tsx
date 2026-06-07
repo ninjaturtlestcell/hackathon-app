@@ -36,7 +36,7 @@ export function AppSidebar({ isAdmin = false }: { isAdmin?: boolean }) {
     <Sidebar>
       <SidebarHeader className="px-4 py-3">
         <Link href="/app" className="text-lg font-bold tracking-tight">
-          turtle
+          Turtle
         </Link>
       </SidebarHeader>
       <SidebarContent>

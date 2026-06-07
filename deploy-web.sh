@@ -30,14 +30,14 @@ gcloud artifacts repositories describe "$REPO" \
   || gcloud artifacts repositories create "$REPO" \
        --repository-format=docker --location "$REGION" --project "$PROJECT_ID"
 
-echo "==> Docker auth"
-gcloud auth configure-docker "${REGION}-docker.pkg.dev" --quiet
-
-echo "==> Image build + push ($IMAGE)"
-docker buildx build --platform linux/amd64 \
-  --build-arg NEXT_PUBLIC_SUPABASE_URL="$NEXT_PUBLIC_SUPABASE_URL" \
-  --build-arg NEXT_PUBLIC_SUPABASE_ANON_KEY="$NEXT_PUBLIC_SUPABASE_ANON_KEY" \
-  -t "$IMAGE" --push "$ROOT"
+echo "==> Cloud Build ile build + push ($IMAGE)"
+# Build'i gercek amd64 donaniminda Cloud Build'de yapiyoruz. Boylece Apple
+# Silicon'daki QEMU emulasyon segfault'u olmaz ve yerel Docker'a gerek kalmaz.
+# Virgul/ozel karakter sorunu olmasin diye substitution'lara ^@^ ayraci kullanildi.
+gcloud builds submit "$ROOT" \
+  --project "$PROJECT_ID" \
+  --config "$ROOT/cloudbuild.yaml" \
+  --substitutions "^@^_IMAGE=${IMAGE}@_NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}@_NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}"
 
 echo "==> Cloud Run deploy ($SERVICE @ $REGION)"
 gcloud run deploy "$SERVICE" \

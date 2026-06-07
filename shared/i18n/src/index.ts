@@ -12,7 +12,7 @@ export const fallbackLng: Language = "en";
 export const defaultNS = "translation";
 
 const en = {
-  appName: "turtle",
+  appName: "Turtle",
   nav: {
     dashboard: "Dashboard",
     components: "Components",
@@ -52,7 +52,7 @@ const en = {
 };
 
 const tr: typeof en = {
-  appName: "turtle",
+  appName: "Turtle",
   nav: {
     dashboard: "Panel",
     components: "Bilesenler",

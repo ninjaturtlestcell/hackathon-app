@@ -18,8 +18,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Monorepo Web",
-  description: "Next.js + shadcn + Supabase (shared monorepo)",
+  title: "Turtle",
+  description: "Turtle — Next.js + Expo + Supabase boilerplate",
 };
 
 export default function RootLayout({

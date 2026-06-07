@@ -1,0 +1,18 @@
+# Cloud Build'e yuklenecek context'ten haric tutulacaklar.
+# (node_modules / .next imaj icinde temiz kurulur, yuklemeye gerek yok.)
+.git
+**/node_modules
+**/.next
+**/.expo
+**/.turbo
+**/dist
+**/*.log
+**/.DS_Store
+
+# env dosyalari imaja gomulmesin; degerler --build-arg ile geliyor
+**/.env
+**/.env.*
+.env.supabase
+
+mobile-app/ios
+mobile-app/android
