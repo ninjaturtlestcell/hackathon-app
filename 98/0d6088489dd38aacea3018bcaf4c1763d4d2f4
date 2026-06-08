@@ -1,0 +1,40 @@
+.github/skills/jira-comment/SKILL.md
+  s_883cfd535aa3ae::t_482a56e8e91148 1-42
+.github/skills/jira-transition/scripts/jira-transition.sh
+  s_883cfd535aa3ae::t_482a56e8e91148 1-113
+.github/skills/jira-transition/SKILL.md
+  s_883cfd535aa3ae::t_482a56e8e91148 1-53
+.env.example
+  h_877e656eab38d8 1-4
+.github/skills/jira-read/SKILL.md
+  s_883cfd535aa3ae::t_482a56e8e91148 1-42
+.github/skills/jira-board-tasks/SKILL.md
+  s_883cfd535aa3ae::t_0b8ec69d67226a 1-54
+.github/skills/jira-comment/scripts/jira-comment.sh
+  s_883cfd535aa3ae::t_482a56e8e91148 1-53
+.github/skills/jira-board-tasks/scripts/jira-board-tasks.sh
+  s_883cfd535aa3ae::t_f86ef23403d56c 1-103
+.github/skills/jira-read/scripts/jira-read.sh
+  s_883cfd535aa3ae::t_482a56e8e91148 1-36
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "980d6088489dd38aacea3018bcaf4c1763d4d2f4",
+  "prompts": {},
+  "humans": {
+    "h_877e656eab38d8": {
+      "author": "Fatih Telis <fatih.telis@turkcell.com.tr>"
+    }
+  },
+  "sessions": {
+    "s_883cfd535aa3ae": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d0c81bac-8c27-41b5-8e80-6bf1e5c73feb",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Fatih Telis <fatih.telis@turkcell.com.tr>"
+    }
+  }
+}
