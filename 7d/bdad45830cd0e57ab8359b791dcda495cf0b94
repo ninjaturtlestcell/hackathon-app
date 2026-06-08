@@ -1,0 +1,87 @@
+shared/i18n/src/index.ts
+  s_e8562d6f005cd9::t_b8b9f0a13c9ef9 116
+  s_dd47c7956a2576::t_f368f2545f18fe 37
+  s_dd47c7956a2576::t_e984ef58470400 130
+  s_e8562d6f005cd9::t_3b7bfaef148706 23
+web-app/next.config.ts
+  s_e8562d6f005cd9::t_bd44f88d5aa581 8
+web-app/package.json
+  s_e8562d6f005cd9::t_ffad8511ddc83e 17
+shared/jira/src/types.ts
+  s_e8562d6f005cd9::t_a330eaab5cb38e 1
+.mcp.json
+  s_15d214d99642b6::t_c8e94f56dbf991 17-18
+shared/jira/src/index.ts
+  s_e8562d6f005cd9::t_c24da22ff4b230 2
+  s_e8562d6f005cd9::t_5da524f1340bfc 1
+web-app/src/app/app/jira/page.tsx
+  ai_agent 1-5
+web-app/src/app/api/jira/verify/route.ts
+  s_e8562d6f005cd9::t_6d12f95c9c043f 1-31
+shared/jira/package.json
+  s_e8562d6f005cd9::t_9c0b349b259aac 1-8,12-13
+  s_e8562d6f005cd9::t_75d47fd320f9b4 9-11
+shared/jira/src/client.ts
+  s_e8562d6f005cd9::t_360b6343236a90 45-46,49-59
+  s_e8562d6f005cd9::t_5d30fb82d15417 1-21,23-44,47-48
+  s_e8562d6f005cd9::t_97a42feec04187 22,60
+web-app/src/app/api/jira/boards/[boardId]/issues/route.ts
+  s_e8562d6f005cd9::t_13aa96edf1282a 1-34,36-38,40-44
+  s_e8562d6f005cd9::t_4212b5b3294e08 35,39
+web-app/src/app/login/login-form.tsx
+  s_dd47c7956a2576::t_32486f6ee77e9f 3,11,17-18,30,37-44,69-75,118-134
+pnpm-lock.yaml
+  ai_agent 248-253,303-305,2957-2960,3075-3077,3086-3088,3309-3312,3532-3535,4131-4139,4147-4150,4329-4332,4577-4580,5447-5450,9871-9876,10013-10014,10021-10030,10316-10319,10520-10521,11327-11328,11335-11342,11509-11515,11760-11768,12587
+web-app/.env.example
+  h_877e656eab38d8 3
+mobile-app/.env.example
+  s_e8562d6f005cd9::t_981a3c8b9fb510 3
+web-app/src/components/app-sidebar.tsx
+  s_e8562d6f005cd9::t_beee1d8b3a3a3d 33
+  s_e8562d6f005cd9::t_357ab8b30e6652 9
+web-app/src/app/app/jira/jira-page.tsx
+  s_e8562d6f005cd9::t_46c387389e9157 13,32-63,65-70,133,137
+  s_e8562d6f005cd9::t_7ea137caf6d5d5 184
+  s_e8562d6f005cd9::t_9f247a3ebd01c3 5,79-89,136,138-165,193-213
+  s_e8562d6f005cd9::t_1edfbe9b8079fd 19
+  s_e8562d6f005cd9::t_8b22601b96fe09 64,71-75
+mobile-app/src/app/(auth)/login.tsx
+  s_dd47c7956a2576::t_db6d5181ab578e 1,8,11,18-19,29,36-44,58-64,113-127
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "7dbdad45830cd0e57ab8359b791dcda495cf0b94",
+  "prompts": {},
+  "humans": {
+    "h_877e656eab38d8": {
+      "author": "Fatih Telis <fatih.telis@turkcell.com.tr>"
+    }
+  },
+  "sessions": {
+    "s_15d214d99642b6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7ef822b5-ae22-49fb-ad07-a616f005d70d",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Fatih Telis <fatih.telis@turkcell.com.tr>"
+    },
+    "s_dd47c7956a2576": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ef4631d0-0b98-4154-8706-ebe1fa75615a",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Fatih Telis <fatih.telis@turkcell.com.tr>"
+    },
+    "s_e8562d6f005cd9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5034a3e8-3819-465b-83f7-a554ab402574",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Fatih Telis <fatih.telis@turkcell.com.tr>"
+    }
+  }
+}
