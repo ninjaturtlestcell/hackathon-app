@@ -1,0 +1,46 @@
+.claude/skills/jira-create-task/SKILL.md
+  s_883cfd535aa3ae::t_1fff357154810c 1-62
+.claude/skills/jira-create-task/scripts/jira-create-task.sh
+  s_883cfd535aa3ae::t_01c09075312862 1-96
+.claude/skills/jira-transition/SKILL.md
+  s_883cfd535aa3ae::t_c510c59cb332e0 1-53
+.claude/skills/jira-read/scripts/jira-read.sh
+  s_883cfd535aa3ae::t_c510c59cb332e0 1-36
+.claude/skills/jira-comment/SKILL.md
+  s_883cfd535aa3ae::t_c510c59cb332e0 1-42
+.claude/skills/jira-board-issues/SKILL.md
+  s_883cfd535aa3ae::t_c510c59cb332e0 1-54
+.claude/skills/jira-comment/scripts/jira-comment.sh
+  s_883cfd535aa3ae::t_c510c59cb332e0 1-53
+.claude/skills/jira-board-issues/scripts/jira-board-issues.sh
+  s_883cfd535aa3ae::t_c510c59cb332e0 1-56
+.claude/skills/jira-edit-description/scripts/jira-edit-description.sh
+  s_883cfd535aa3ae::t_2c712989196f5a 1-51
+.claude/skills/jira-edit-description/SKILL.md
+  s_883cfd535aa3ae::t_77e57c7aeb072f 1-46
+.claude/skills/jira-read/SKILL.md
+  s_883cfd535aa3ae::t_c510c59cb332e0 1-42
+.claude/skills/jira-transition/scripts/jira-transition.sh
+  s_883cfd535aa3ae::t_c510c59cb332e0 1-113
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "61ccd0803e923df9809e881db70f1735a9c90b88",
+  "prompts": {},
+  "humans": {
+    "h_877e656eab38d8": {
+      "author": "Fatih Telis <fatih.telis@turkcell.com.tr>"
+    }
+  },
+  "sessions": {
+    "s_883cfd535aa3ae": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d0c81bac-8c27-41b5-8e80-6bf1e5c73feb",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Fatih Telis <fatih.telis@turkcell.com.tr>"
+    }
+  }
+}
