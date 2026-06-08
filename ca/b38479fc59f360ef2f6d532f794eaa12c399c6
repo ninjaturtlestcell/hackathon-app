@@ -1,0 +1,28 @@
+.env.context7.example
+  h_877e656eab38d8 1
+CLAUDE.md
+  s_ca9b2ae56fbe76::t_2a2f317a8fdd8b 1-137
+.nvmrc
+  h_877e656eab38d8 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "cab38479fc59f360ef2f6d532f794eaa12c399c6",
+  "prompts": {},
+  "humans": {
+    "h_877e656eab38d8": {
+      "author": "Fatih Telis <fatih.telis@turkcell.com.tr>"
+    }
+  },
+  "sessions": {
+    "s_ca9b2ae56fbe76": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9cf083fd-7f37-4c30-9818-8ed9f8b77c66",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Fatih Telis <fatih.telis@turkcell.com.tr>"
+    }
+  }
+}
