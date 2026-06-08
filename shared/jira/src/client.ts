@@ -342,6 +342,95 @@ export async function getBoardMembers(
   }));
 }
 
+export async function getSprintIssues(
+  creds: JiraCredentials,
+  sprintId: number
+): Promise<SprintWithIssues> {
+  const client = createAgileClient(creds);
+
+  const [sprint, rawIssues] = await Promise.all([
+    client.sprint.getSprint({ sprintId }),
+    fetchAllIssuePages(client, sprintId),
+  ]);
+
+  return {
+    id: sprint.id,
+    name: sprint.name,
+    state: sprint.state ?? "",
+    startDate: sprint.startDate ?? null,
+    endDate: sprint.endDate ?? null,
+    completeDate: sprint.completeDate ?? null,
+    goal: sprint.goal ?? null,
+    issues: rawIssues.map(mapIssue),
+  };
+}
+
+export interface IssueDetail {
+  id: string;
+  key: string;
+  summary: string;
+  description: string | null;
+  issueType: string;
+  storyPoints: number | null;
+  assignee: string | null;
+  priority: string | null;
+  labels: string[];
+  status: string;
+}
+
+function extractAdfText(node: unknown): string {
+  if (!node || typeof node !== "object") return "";
+  const n = node as { type?: string; text?: string; content?: unknown[] };
+  if (n.type === "text" && typeof n.text === "string") return n.text;
+  if (Array.isArray(n.content)) return n.content.map(extractAdfText).join(" ");
+  return "";
+}
+
+export async function getIssueDetails(
+  creds: JiraCredentials,
+  issueKeys: string[]
+): Promise<IssueDetail[]> {
+  const client = createVersion2Client(creds);
+  const results = await Promise.allSettled(
+    issueKeys.map(async (key) => {
+      const issue = await client.issues.getIssue({ issueIdOrKey: key });
+      const f = issue.fields as Record<string, unknown>;
+
+      let description: string | null = null;
+      if (f.description) {
+        if (typeof f.description === "string") {
+          description = f.description || null;
+        } else {
+          const text = extractAdfText(f.description).replace(/\s+/g, " ").trim();
+          description = text || null;
+        }
+      }
+
+      const status = f.status as { name?: string } | undefined;
+      const issueType = f.issuetype as { name?: string } | undefined;
+      const assignee = f.assignee as { displayName?: string } | null | undefined;
+      const priority = f.priority as { name?: string } | null | undefined;
+
+      return {
+        id: issue.id ?? "",
+        key: issue.key ?? key,
+        summary: (f.summary as string) ?? "",
+        description,
+        issueType: issueType?.name ?? "",
+        storyPoints: extractStoryPoints(f as AgileModels.Fields),
+        assignee: assignee?.displayName ?? null,
+        priority: priority?.name ?? null,
+        labels: Array.isArray(f.labels) ? (f.labels as string[]) : [],
+        status: status?.name ?? "",
+      } satisfies IssueDetail;
+    })
+  );
+
+  return results
+    .filter((r): r is PromiseFulfilledResult<IssueDetail> => r.status === "fulfilled")
+    .map((r) => r.value);
+}
+
 export async function getBoardSprintHistory(
   creds: JiraCredentials,
   boardId: number,
