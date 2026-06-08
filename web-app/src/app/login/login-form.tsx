@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -8,10 +8,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
 
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Field } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { createClient } from "@/lib/supabase/client";
 import { signInSchema, type SignInInput } from "@shared/schemas";
+
+const STORAGE_KEY = "remembered_email";
 
 type Mode = "signin" | "signup";
 
@@ -24,11 +27,20 @@ export function LoginForm() {
   const [mode, setMode] = useState<Mode>("signin");
   const [serverError, setServerError] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
+  const [rememberMe, setRememberMe] = useState(false);
 
   const form = useForm<SignInInput>({
     resolver: zodResolver(signInSchema),
     defaultValues: { email: "", password: "" },
   });
+
+  useEffect(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      form.setValue("email", saved);
+      setRememberMe(true);
+    }
+  }, [form]);
 
   const onSubmit = form.handleSubmit(async ({ email, password }) => {
     setServerError(null);
@@ -54,6 +66,13 @@ export function LoginForm() {
       setInfo(t("auth.signupTaken"));
       return;
     }
+
+    if (rememberMe) {
+      localStorage.setItem(STORAGE_KEY, email);
+    } else {
+      localStorage.removeItem(STORAGE_KEY);
+    }
+
     router.replace(returnUrl);
     router.refresh();
   });
@@ -96,12 +115,23 @@ export function LoginForm() {
       </Field>
 
       {mode === "signin" ? (
-        <Link
-          href="/auth/reset-password"
-          className="-mt-1 self-end text-sm text-muted-foreground hover:underline"
-        >
-          {t("auth.forgotPassword")}
-        </Link>
+        <div className="flex items-center justify-between -mt-1">
+          <label className="flex items-center gap-2 cursor-pointer">
+            <Checkbox
+              checked={rememberMe}
+              onCheckedChange={(v) => setRememberMe(v === true)}
+            />
+            <span className="text-sm text-muted-foreground">
+              {t("auth.rememberMe")}
+            </span>
+          </label>
+          <Link
+            href="/auth/reset-password"
+            className="text-sm text-muted-foreground hover:underline"
+          >
+            {t("auth.forgotPassword")}
+          </Link>
+        </div>
       ) : null}
 
       {serverError ? (

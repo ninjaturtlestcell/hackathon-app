@@ -1,17 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ActivityIndicator, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Field } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Text } from "@/components/ui/text";
 import { useAuth } from "@/context/auth";
 import { signInSchema, type SignInInput } from "@shared/schemas";
+
+const STORAGE_KEY = "remembered_email";
 
 type Mode = "signin" | "signup";
 
@@ -22,11 +26,21 @@ export default function LoginScreen() {
   const [mode, setMode] = useState<Mode>("signin");
   const [serverError, setServerError] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
+  const [rememberMe, setRememberMe] = useState(false);
 
   const form = useForm<SignInInput>({
     resolver: zodResolver(signInSchema),
     defaultValues: { email: "", password: "" },
   });
+
+  useEffect(() => {
+    AsyncStorage.getItem(STORAGE_KEY).then((saved) => {
+      if (saved) {
+        form.setValue("email", saved);
+        setRememberMe(true);
+      }
+    });
+  }, [form]);
 
   const onSubmit = form.handleSubmit(async ({ email, password }) => {
     setServerError(null);
@@ -40,8 +54,14 @@ export default function LoginScreen() {
       return;
     }
     if (mode === "signup") {
-      // Email dogrulama acik ise oturum hemen baslamaz.
       setInfo(t("auth.signupTaken"));
+      return;
+    }
+
+    if (rememberMe) {
+      await AsyncStorage.setItem(STORAGE_KEY, email);
+    } else {
+      await AsyncStorage.removeItem(STORAGE_KEY);
     }
     // Basarili giriste kok guard otomatik olarak uygulamaya yonlendirir.
   });
@@ -90,6 +110,21 @@ export default function LoginScreen() {
               />
             )}
           </Field>
+
+          {mode === "signin" ? (
+            <View className="flex-row items-center gap-2">
+              <Checkbox
+                checked={rememberMe}
+                onCheckedChange={(v) => setRememberMe(v === true)}
+              />
+              <Text
+                className="font-sans text-sm text-muted-foreground"
+                onPress={() => setRememberMe((v) => !v)}
+              >
+                {t("auth.rememberMe")}
+              </Text>
+            </View>
+          ) : null}
         </View>
 
         {serverError ? (

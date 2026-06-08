@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   // shared/* paketleri TS kaynak olarak yayinlandigi icin Next'in
   // bunlari transpile etmesi gerekiyor.
   transpilePackages: [
+    "@shared/jira",
     "@shared/lib",
     "@shared/schemas",
     "@shared/supabase",

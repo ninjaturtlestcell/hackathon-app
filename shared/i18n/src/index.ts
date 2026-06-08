@@ -20,6 +20,7 @@ const en = {
     profile: "Profile",
     settings: "Settings",
     admin: "Admin",
+    jira: "Jira",
   },
   auth: {
     signIn: "Sign In",
@@ -33,6 +34,7 @@ const en = {
     noAccount: "No account? Sign up",
     haveAccount: "Already have an account? Sign in",
     forgotPassword: "Forgot password?",
+    rememberMe: "Remember me",
     signupTaken: "Registration received. You may need to verify your email.",
     reset: {
       title: "Reset Password",
@@ -111,6 +113,7 @@ const tr: typeof en = {
     profile: "Profil",
     settings: "Ayarlar",
     admin: "Admin",
+    jira: "Jira",
   },
   auth: {
     signIn: "Giriş Yap",
@@ -124,6 +127,7 @@ const tr: typeof en = {
     noAccount: "Hesabın yok mu? Kayıt ol",
     haveAccount: "Zaten hesabın var mı? Giriş yap",
     forgotPassword: "Şifremi unuttum",
+    rememberMe: "Beni hatırla",
     signupTaken: "Kayıt alındı. E-postanı doğrulaman gerekebilir.",
     reset: {
       title: "Şifre Sıfırlama",

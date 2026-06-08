@@ -14,16 +14,8 @@
       ]
     },
     "supabase": {
-      "command": "pnpm",
-      "args": [
-        "exec",
-        "dotenv",
-        "-e",
-        ".env.supabase",
-        "--",
-        "mcp-server-supabase",
-        "--project-ref=onlhpjgqcxcraksddarc"
-      ]
+      "type": "http",
+      "url": "http://127.0.0.1:54321/mcp"
     }
   }
 }

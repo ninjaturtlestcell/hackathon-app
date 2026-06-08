@@ -1,0 +1,13 @@
+{
+  "name": "@shared/jira",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "jira.js": "^5.3.1"
+  }
+}

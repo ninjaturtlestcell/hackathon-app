@@ -14,6 +14,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@shared/assets": "workspace:*",
     "@shared/i18n": "workspace:*",
+    "@shared/jira": "workspace:*",
     "@shared/lib": "workspace:*",
     "@shared/schemas": "workspace:*",
     "@shared/supabase": "workspace:*",

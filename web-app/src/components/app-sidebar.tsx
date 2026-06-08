@@ -6,6 +6,7 @@ import logoLight from "@shared/assets/logo-light.png";
 import logoDark from "@shared/assets/logo-dark.png";
 import {
   Component,
+  Kanban,
   LayoutDashboard,
   Settings,
   ShieldCheck,
@@ -29,6 +30,7 @@ import {
 const items = [
   { titleKey: "nav.dashboard", href: "/app", icon: LayoutDashboard },
   { titleKey: "nav.components", href: "/app/components", icon: Component },
+  { titleKey: "nav.jira", href: "/app/jira", icon: Kanban },
   { titleKey: "nav.profile", href: "/app/profile", icon: User },
   { titleKey: "nav.settings", href: "/app", icon: Settings },
 ] as const;
