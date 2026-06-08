@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { getBoardIssues } from "@shared/jira";
+import { getBoardSprintHistory } from "@shared/jira";
 import { getJiraSession } from "@/lib/jira/session";
 
 const BASE_URL = process.env.NEXT_PUBLIC_JIRA_BASE_URL ?? "";
 
 export async function GET(
-  _req: NextRequest,
+  req: NextRequest,
   { params }: { params: Promise<{ boardId: string }> },
 ) {
   if (!BASE_URL) {
@@ -17,6 +17,8 @@ export async function GET(
   }
 
   const { boardId } = await params;
+  const limitParam = req.nextUrl.searchParams.get("limit");
+  const limit = limitParam ? Math.min(Math.max(Number(limitParam), 1), 100) : 10;
 
   const session = await getJiraSession();
   if (!session) {
@@ -29,13 +31,15 @@ export async function GET(
   const password = decoded.slice(colonIdx + 1);
 
   try {
-    const { issues, total, startAt } = await getBoardIssues(
+    const sprints = await getBoardSprintHistory(
       { baseUrl: BASE_URL, username, password },
       Number(boardId),
+      limit,
     );
-    return NextResponse.json({ issues, total, startAt });
+    return NextResponse.json({ sprints, total: sprints.length });
   } catch (err) {
-    const message = err instanceof Error ? err.message : "Failed to fetch issues";
+    const message =
+      err instanceof Error ? err.message : "Failed to fetch sprint history";
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }

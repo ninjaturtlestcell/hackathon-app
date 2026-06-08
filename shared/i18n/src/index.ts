@@ -95,6 +95,14 @@ const en = {
     dark: "Dark",
     system: "System",
   },
+  settings: {
+    title: "Settings",
+    subtitle: "Manage your app preferences.",
+    appearance: "Appearance",
+    appearanceDesc: "Choose your preferred color scheme.",
+    localization: "Localization",
+    localizationDesc: "Choose the display language.",
+  },
   demo: {
     title: "i18n & Theme",
     greeting: "Hello! This text is translated.",
@@ -188,6 +196,14 @@ const tr: typeof en = {
     light: "Açık",
     dark: "Koyu",
     system: "Sistem",
+  },
+  settings: {
+    title: "Ayarlar",
+    subtitle: "Uygulama tercihlerinizi yönetin.",
+    appearance: "Görünüm",
+    appearanceDesc: "Tercih ettiğiniz renk şemasını seçin.",
+    localization: "Yerelleştirme",
+    localizationDesc: "Görüntüleme dilini seçin.",
   },
   demo: {
     title: "i18n & Tema",

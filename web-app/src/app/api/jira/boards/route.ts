@@ -1,22 +1,17 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-import { getBoardIssues } from "@shared/jira";
+import { getAllBoards } from "@shared/jira";
 import { getJiraSession } from "@/lib/jira/session";
 
 const BASE_URL = process.env.NEXT_PUBLIC_JIRA_BASE_URL ?? "";
 
-export async function GET(
-  _req: NextRequest,
-  { params }: { params: Promise<{ boardId: string }> },
-) {
+export async function GET() {
   if (!BASE_URL) {
     return NextResponse.json(
-      { error: "NEXT_PUBLIC_JIRA_BASE_URL is not configured" },
+      { error: "NEXT_PUBLIC_JIRA_BASE_URL yapılandırılmamış" },
       { status: 500 },
     );
   }
-
-  const { boardId } = await params;
 
   const session = await getJiraSession();
   if (!session) {
@@ -29,13 +24,10 @@ export async function GET(
   const password = decoded.slice(colonIdx + 1);
 
   try {
-    const { issues, total, startAt } = await getBoardIssues(
-      { baseUrl: BASE_URL, username, password },
-      Number(boardId),
-    );
-    return NextResponse.json({ issues, total, startAt });
+    const boards = await getAllBoards({ baseUrl: BASE_URL, username, password });
+    return NextResponse.json({ boards });
   } catch (err) {
-    const message = err instanceof Error ? err.message : "Failed to fetch issues";
+    const message = err instanceof Error ? err.message : "Board'lar alınamadı";
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
