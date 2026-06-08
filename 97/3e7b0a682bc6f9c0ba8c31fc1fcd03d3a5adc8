@@ -1,0 +1,61 @@
+web-app/src/components/app-sidebar.tsx
+  s_5fac847173ac31::t_7f47d1438edf6d 56,65
+web-app/src/components/site-header.tsx
+  s_5fac847173ac31::t_ecba719362bf51 22,31
+.mcp.json
+  s_a6bc08aabb9441::t_a05f2350aa83d6 3,15
+  s_a6bc08aabb9441::t_f69a20608805d3 4-14
+.claude/settings.json
+  s_dd7456b5313798::t_edf07597048400 15,17-29
+web-app/.env.example
+  h_877e656eab38d8 1-2
+.claude/skills/figma-to-code/SKILL.md
+  s_dd7456b5313798::t_c12b34044df5cc 1-40
+.gitignore
+  s_a6bc08aabb9441::t_66089a9fa3b1fa 11
+web-app/src/components/providers.tsx
+  s_5fac847173ac31::t_69089a3ebe7075 3,15-44
+.claude/agents/figma-designer.md
+  s_dd7456b5313798::t_334bc113d343ac 1-65
+web-app/.gitignore
+  h_877e656eab38d8 35
+web-app/src/lib/i18n.ts
+  s_5fac847173ac31::t_153656235237aa 8-9,15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "973e7b0a682bc6f9c0ba8c31fc1fcd03d3a5adc8",
+  "prompts": {},
+  "humans": {
+    "h_877e656eab38d8": {
+      "author": "Fatih Telis <fatih.telis@turkcell.com.tr>"
+    }
+  },
+  "sessions": {
+    "s_5fac847173ac31": {
+      "agent_id": {
+        "tool": "github-copilot",
+        "id": "12100a5a-f3ee-4bbf-83a6-7c6239b61daf",
+        "model": "gpt-5.3-codex"
+      },
+      "human_author": "Fatih Telis <fatih.telis@turkcell.com.tr>"
+    },
+    "s_a6bc08aabb9441": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "27386b48-87d5-4929-8d8a-ad743522d4de",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Fatih Telis <fatih.telis@turkcell.com.tr>"
+    },
+    "s_dd7456b5313798": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0cf3dc94-4880-4ae1-92e7-2114facee77f",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Fatih Telis <fatih.telis@turkcell.com.tr>"
+    }
+  }
+}
