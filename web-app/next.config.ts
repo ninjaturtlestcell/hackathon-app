@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 import path from "node:path";
 
 const nextConfig: NextConfig = {
+  devIndicators: false,
   // shared/* paketleri TS kaynak olarak yayinlandigi icin Next'in
   // bunlari transpile etmesi gerekiyor.
   transpilePackages: [

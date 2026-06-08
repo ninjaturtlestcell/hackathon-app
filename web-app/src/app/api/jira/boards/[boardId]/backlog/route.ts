@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { getBoardIssues } from "@shared/jira";
+import { getBoardBacklog } from "@shared/jira";
 import { getJiraSession } from "@/lib/jira/session";
 
 const BASE_URL = process.env.NEXT_PUBLIC_JIRA_BASE_URL ?? "";
@@ -29,13 +29,14 @@ export async function GET(
   const password = decoded.slice(colonIdx + 1);
 
   try {
-    const { issues, total, startAt } = await getBoardIssues(
+    const issues = await getBoardBacklog(
       { baseUrl: BASE_URL, username, password },
       Number(boardId),
     );
-    return NextResponse.json({ issues, total, startAt });
+    return NextResponse.json({ issues, total: issues.length });
   } catch (err) {
-    const message = err instanceof Error ? err.message : "Failed to fetch issues";
+    const message =
+      err instanceof Error ? err.message : "Failed to fetch backlog";
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }

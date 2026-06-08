@@ -4,20 +4,26 @@ import { useTranslation } from "react-i18next";
 
 import { LanguageToggle } from "@/components/language-toggle";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import type { AppRole } from "@/lib/supabase/role";
 
 type AppTopbarProps = {
-  email?: string | null;
-  role: AppRole | null;
-  signOutAction: () => Promise<void>;
+  displayName: string;
+  email: string;
+  avatarUrl?: string;
 };
 
-export function AppTopbar({ email, role, signOutAction }: AppTopbarProps) {
+export function AppTopbar({ displayName, email, avatarUrl }: AppTopbarProps) {
   const { t } = useTranslation();
+
+  const initials = displayName
+    .split(" ")
+    .map((w) => w[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+
   return (
     <header className="flex h-14 shrink-0 items-center justify-between gap-2 border-b px-4">
       <div className="flex items-center gap-2">
@@ -25,22 +31,24 @@ export function AppTopbar({ email, role, signOutAction }: AppTopbarProps) {
         <Separator orientation="vertical" className="h-4" />
         <span className="text-sm font-medium">{t("dashboard.title")}</span>
       </div>
-      <div className="flex items-center gap-2">
-        {role ? (
-          <Badge variant={role === "admin" ? "default" : "secondary"}>
-            {role}
-          </Badge>
-        ) : null}
+      <div className="flex items-center gap-3">
         <LanguageToggle />
         <ThemeToggle />
-        <span className="ml-1 hidden text-sm text-muted-foreground sm:inline">
-          {email}
-        </span>
-        <form action={signOutAction}>
-          <Button type="submit" variant="outline" size="sm">
-            {t("auth.signOut")}
-          </Button>
-        </form>
+        <Separator orientation="vertical" className="h-4" />
+        <div className="flex items-center gap-2">
+          <Avatar className="size-7">
+            {avatarUrl && (
+              <AvatarImage
+                src={`/api/jira/avatar?url=${encodeURIComponent(avatarUrl)}`}
+                alt={displayName}
+              />
+            )}
+            <AvatarFallback className="text-xs">{initials}</AvatarFallback>
+          </Avatar>
+          <span className="hidden text-sm font-medium sm:inline">
+            {displayName || email}
+          </span>
+        </div>
       </div>
     </header>
   );

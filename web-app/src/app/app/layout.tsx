@@ -1,41 +1,38 @@
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 
 import { AppSidebar } from "@/components/app-sidebar";
 import { AppTopbar } from "@/components/app-topbar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { createClient } from "@/lib/supabase/server";
-import { getUserRole } from "@/lib/supabase/role";
+import { getJiraSession, JIRA_SESSION_COOKIE } from "@/lib/jira/session";
 
-// /app ve altindaki tum route'lar korumali. Middleware zaten guard yapiyor;
-// burada sunucu tarafinda ikinci bir savunma katmani + kullanici bilgisi.
 export default async function AppLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const session = await getJiraSession();
 
-  if (!user) {
+  if (!session) {
     redirect("/login?returnUrl=/app");
   }
 
-  const role = await getUserRole();
-
   async function signOut() {
     "use server";
-    const supabase = await createClient();
-    await supabase.auth.signOut();
+    const cookieStore = await cookies();
+    cookieStore.delete(JIRA_SESSION_COOKIE);
     redirect("/login");
   }
 
   return (
     <SidebarProvider>
-      <AppSidebar isAdmin={role === "admin"} />
+      <AppSidebar signOutAction={signOut} />
       <SidebarInset>
-        <AppTopbar email={user.email} role={role} signOutAction={signOut} />
+        <AppTopbar
+          displayName={session.user.displayName}
+          email={session.user.email}
+          avatarUrl={session.user.avatarUrl}
+        />
         <main className="flex flex-1 flex-col p-6">{children}</main>
       </SidebarInset>
     </SidebarProvider>
