@@ -1,0 +1,139 @@
+web-app/src/components/app-sidebar.tsx
+  s_de95601cfb9e19::t_ef43368c12d578 9,19,28,37-43,62,71,95,97-99,108-111
+  s_de95601cfb9e19::t_313c8946770a85 96,100-107
+  s_de95601cfb9e19::t_e6b1f106fe7ead 34
+web-app/src/app/app/settings/page.tsx
+  s_de95601cfb9e19::t_5073a961a1a504 1-113
+web-app/src/app/api/jira/auth/login/route.ts
+  s_d708bf13c1b4cf::t_2812822dc293f8 1-56
+web-app/src/lib/jira/session.ts
+  s_d708bf13c1b4cf::t_d8ebd1c6ab1970 1-26
+web-app/src/proxy.ts
+  s_d708bf13c1b4cf::t_7323b431aae1e8 3,9,11,13,21,28
+web-app/src/app/app/layout.tsx
+  s_de95601cfb9e19::t_35a3d1aa87e655 29
+  s_de95601cfb9e19::t_90fbe55caab10b 31-35
+  s_d708bf13c1b4cf::t_fd3bcafc530672 2,7,14,16,22-23
+web-app/src/app/app/jira/jira-page.tsx
+  s_d708bf13c1b4cf::t_94aac3cf8d7bed 681,684,687-688,693,708-712
+  s_de95601cfb9e19::t_07aa627da1ef2d 40-46
+  s_d708bf13c1b4cf::t_ff0145298eaaf4 689-690,707
+  s_d708bf13c1b4cf::t_1e79a9ccc3fdd9 779
+  s_d708bf13c1b4cf::t_bb8ccb6b5282d1 13,26-38,56,60-63,655-657,663-675,678,735-736,745,747-758,760-762,767-777,781-786,790-804,822,825,828-832
+  s_de95601cfb9e19::t_5b3147e7f945ab 722-723
+  s_d708bf13c1b4cf::t_2c99dd93ffc4df 662
+  s_d708bf13c1b4cf::t_4d5a741f1a0532 15
+  s_d708bf13c1b4cf::t_d309bff7f79ca8 71,75
+  s_d708bf13c1b4cf::t_a8920c81edad40 395,397-409,412,416,497,519-522,527-530,542-543,555-559,561-568,590,609-612
+  s_d708bf13c1b4cf::t_a1a4fad43caef1 17
+  s_de95601cfb9e19::t_7b9f4a8cbe2692 660
+  s_de95601cfb9e19::t_c9c025423c38fa 54
+  s_d708bf13c1b4cf::t_93bd624d15f947 176-178
+  s_d708bf13c1b4cf::t_cba2b50bd0b1f8 861-863
+  s_de95601cfb9e19::t_8915a0062822a6 69
+  s_d708bf13c1b4cf::t_bca57cd7785121 780
+  s_de95601cfb9e19::t_66caf4924277c8 806-821
+  s_d708bf13c1b4cf::t_aaf6c0ef0ee07e 854-860
+  s_d708bf13c1b4cf::t_866cce8d1fbb1e 187,195,197,199,208-209
+  s_d708bf13c1b4cf::t_ad2b94f433297b 77-82
+  s_d708bf13c1b4cf::t_ef1cc0cb43ca19 182,184-186,188-189,191-192,207,214-233,240-250,256-260
+  s_de95601cfb9e19::t_9fb9ff9bd15f63 516-517,591-608
+  s_d708bf13c1b4cf::t_7d4c34df90fb90 613-629,631-651
+  s_d708bf13c1b4cf::t_a72ea8e97d4802 630
+  s_d708bf13c1b4cf::t_dda3c1cde537c1 680,685-686,691-692,694-705
+  s_d708bf13c1b4cf::t_939c43c4f49450 853,864,866-876,878-879,885-892,921
+  s_d708bf13c1b4cf::t_6e9e0a64f9ac64 99
+  s_d708bf13c1b4cf::t_ff35c0961e4d14 16,19-24
+  s_d708bf13c1b4cf::t_7b83809f804209 55
+  s_d708bf13c1b4cf::t_5107ba4602ee78 877,922
+  s_de95601cfb9e19::t_1bd201fb95e122 834-852,880-884,896-900
+  s_d708bf13c1b4cf::t_cf9d31ecdcae11 893-895,901-920
+  s_de95601cfb9e19::t_3036c29ab6cddd 295,297-298,373-382,384,386-389
+  s_d708bf13c1b4cf::t_85a4a13ae2743a 827,833,865
+  s_d708bf13c1b4cf::t_46c9e247efabbc 661
+  s_de95601cfb9e19::t_5cbf91abd12447 826
+  s_d708bf13c1b4cf::t_cefe2e6b5681aa 3-12,25,39,47-53,58-59,65,83-98,100-123,125,127-175,179-180,262,264-294,296,300-343,345-369,371-372,652-653,658-659,677,679,682-683,706,715-721,724-734,738-742,746,759,763-766,778,787-789,823-824
+  s_d708bf13c1b4cf::t_1cdddb6ddf6ad2 417-496,498-515,518,523-526,531-541,544-554,560,569-589
+  s_d708bf13c1b4cf::t_f1422904117bdb 194,196,198,200-203,211,234-239,251-255
+web-app/src/app/api/jira/boards/[boardId]/members/route.ts
+  s_d708bf13c1b4cf::t_f90aad1aba408a 9,19,34
+  s_d708bf13c1b4cf::t_efafbab00e324d 1-8,10-18,20-33,35-41
+web-app/src/app/api/jira/boards/route.ts
+  s_d708bf13c1b4cf::t_124021eaf238d1 1-33
+web-app/src/app/api/jira/boards/[boardId]/sprint-history/route.ts
+  s_de95601cfb9e19::t_b4fb357138ad05 20-21
+  s_d708bf13c1b4cf::t_96adafd10be6cc 4,10,15,23-25,28,36
+  s_de95601cfb9e19::t_2d0f481cc1c736 9
+  s_de95601cfb9e19::t_70eaeaa5b4049c 1-3,5-8,11-14,16-19,22,26-27,29-35,38-45
+  s_de95601cfb9e19::t_c032a3c4808625 37
+shared/i18n/src/index.ts
+  s_de95601cfb9e19::t_ff3e5636e39377 98-105
+  s_de95601cfb9e19::t_1c2bfc5a35bd08 200-207
+web-app/next.config.ts
+  s_de95601cfb9e19::t_ddf2d72d384fd8 5
+web-app/src/components/app-topbar.tsx
+  s_de95601cfb9e19::t_0a8f312d776d4b 7,12-14,17,19-26,34,37-51
+web-app/src/app/api/jira/boards/[boardId]/issues/route.ts
+  s_d708bf13c1b4cf::t_013ed671b1bc40 4,9-10,15,21-23,26,34
+web-app/src/app/api/jira/avatar/route.ts
+  s_d708bf13c1b4cf::t_06fefdf0e70e67 1-35
+web-app/src/app/app/page.tsx
+  s_de95601cfb9e19::t_407ed8500fa41f 1,4
+web-app/src/app/app/profile/page.tsx
+  s_d708bf13c1b4cf::t_1e450a901d92bd 2,4-7,14-15,18-28,31
+web-app/src/app/api/jira/boards/[boardId]/backlog/route.ts
+  s_de95601cfb9e19::t_bc74b87e77d5e0 1-3,5-8,11-14,16-20,24-25,27-33,35-42
+  s_d708bf13c1b4cf::t_4b68941f21ecf7 4,9-10,15,21-23,26,34
+web-app/src/app/login/login-form.tsx
+  s_d708bf13c1b4cf::t_ce534cfa051ea3 3,6,13-16,18,26-28,31,34-44,54,56,60-64,68-70,77,82-83,95
+web-app/src/app/api/jira/auth/logout/route.ts
+  s_d708bf13c1b4cf::t_015b6129bf326f 1-9
+web-app/package.json
+  s_d708bf13c1b4cf::t_5e25d7a3c42470 28
+shared/jira/src/client.ts
+  s_de95601cfb9e19::t_e56632eb93deda 4-30,49-65,81-101,103-108
+  s_de95601cfb9e19::t_f4dde2bae8369e 66-80,102
+  s_de95601cfb9e19::t_b95a14c4ba31c3 197-220,223,225-231,233-241,265,352,354,360-365,368-370
+  s_de95601cfb9e19::t_a49e2aaedd03a5 242-263
+  s_de95601cfb9e19::t_3a5324a04990bb 280,353,355-359,366-367
+  s_d708bf13c1b4cf::t_77d47a20916a81 314-323,325,331-332,334-344
+  s_de95601cfb9e19::t_44dc2e6afc56a6 31-48
+  s_de95601cfb9e19::t_03c8d7ce2d4e2e 264,266-272,275,277,279,281-282,284-294,296-313,345-347,349-351
+  s_de95601cfb9e19::t_0ec6bacc5b45b8 273-274,276,278,283,295
+  s_d708bf13c1b4cf::t_bee7bc390fcedc 147-177
+  s_d708bf13c1b4cf::t_012fa69acacf6f 327-329,333
+  s_de95601cfb9e19::t_f800e453783851 221-222,224,232
+  s_de95601cfb9e19::t_3d5161130892a5 348
+  s_d708bf13c1b4cf::t_ee7ae84bfe5729 324,326,330
+web-app/src/components/ui/command.tsx
+  s_d708bf13c1b4cf::t_5e25d7a3c42470 1-184
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "56c558b65cfa814b93a42bf8a1ddc020eb178e6a",
+  "prompts": {},
+  "humans": {
+    "h_877e656eab38d8": {
+      "author": "Fatih Telis <fatih.telis@turkcell.com.tr>"
+    }
+  },
+  "sessions": {
+    "s_d708bf13c1b4cf": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e46d535b-fc46-4114-b2f8-f9b06cac5d38",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Fatih Telis <fatih.telis@turkcell.com.tr>"
+    },
+    "s_de95601cfb9e19": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8b062912-5b43-489f-ba18-6f702890367c",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Fatih Telis <fatih.telis@turkcell.com.tr>"
+    }
+  }
+}
