@@ -53,6 +53,7 @@ export function AppSidebar({ isAdmin = false }: { isAdmin?: boolean }) {
             width={110}
             height={28}
             className="h-7 w-auto dark:hidden"
+            style={{ width: 'auto' }}
             priority
           />
           <Image
@@ -61,6 +62,7 @@ export function AppSidebar({ isAdmin = false }: { isAdmin?: boolean }) {
             width={110}
             height={28}
             className="hidden h-7 w-auto dark:block"
+            style={{ width: 'auto' }}
             priority
           />
         </Link>

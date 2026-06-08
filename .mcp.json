@@ -1,5 +1,18 @@
 {
   "mcpServers": {
+    "context7": {
+      "command": "pnpm",
+      "args": [
+        "exec",
+        "dotenv",
+        "-e",
+        ".env.context7",
+        "--",
+        "npx",
+        "-y",
+        "@upstash/context7-mcp@latest"
+      ]
+    },
     "supabase": {
       "command": "pnpm",
       "args": [

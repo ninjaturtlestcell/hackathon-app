@@ -12,8 +12,20 @@
       }
     ]
   },
-  "enabledMcpjsonServers": ["context7", "supabase"],
+  "enabledMcpjsonServers": ["context7", "supabase", "plugin:figma:figma"],
   "permissions": {
-    "allow": ["mcp__supabase__apply_migration", "mcp__supabase__execute_sql"]
+    "allow": [
+      "mcp__supabase__apply_migration",
+      "mcp__supabase__execute_sql",
+      "mcp__plugin_figma_figma__use_figma",
+      "mcp__plugin_figma_figma__get_design_context",
+      "mcp__plugin_figma_figma__get_screenshot",
+      "mcp__plugin_figma_figma__get_metadata",
+      "mcp__plugin_figma_figma__search_design_system",
+      "mcp__plugin_figma_figma__get_libraries",
+      "mcp__plugin_figma_figma__whoami",
+      "mcp__plugin_figma_figma__generate_figma_design",
+      "mcp__plugin_figma_figma__upload_assets"
+    ]
   }
 }

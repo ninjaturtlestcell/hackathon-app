@@ -19,6 +19,7 @@ export function SiteHeader() {
           width={141}
           height={36}
           className="h-9 w-auto dark:hidden"
+          style={{ width: 'auto' }}
           priority
         />
         <Image
@@ -27,6 +28,7 @@ export function SiteHeader() {
           width={141}
           height={36}
           className="hidden h-9 w-auto dark:block"
+          style={{ width: 'auto' }}
           priority
         />
       </Link>
